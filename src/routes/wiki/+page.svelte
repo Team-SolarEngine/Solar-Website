@@ -6,7 +6,22 @@
 <main>
     <Topbar page={page}/>
     
-    <span>maybe later...</span>
+    <span>The Wiki is not currently ready, take some commonly known bugs instead!<br>
+<br>
+<br>
+<p style="font-size: 50vw">Compiling Issues: </p><br>
+Unknown class MP4Handler |  Downgrade hxCodec to 2.5.1 haxelib set hxCodec 2.5.1<br>
+<br>
+discord_rpc | "fatal error C1083: Cannot open include file: '../lib/discord-rpc/include/discord-rpc.h': No such file or directory" | do NOT directly install discord_rpc, run haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc <br>
+<br>
+<br>
+<p style="font-size: 50vw">Game Issues: </p><br>
+<b> Windows: </b>
+Certain lua based HUD elements are not colored correctly/at all - This will be fixed in a minor patch, if you downloaded 0.6.0's windows build, update to 0.6.1 when it releases.
+
+<b> Universal: </b>
+Result Screen does not properly exit song in some cases - Unknown Cause, cannot guarentee it will be able to be fixed.
+</span>
 </main>
 
 <style>
