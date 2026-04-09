@@ -15,7 +15,7 @@ Unknown class MP4Handler |  Downgrade hxCodec to 2.5.1 <code>haxelib set hxCodec
 discord_rpc | "fatal error C1083: Cannot open include file: '../lib/discord-rpc/include/discord-rpc.h': No such file or directory" | do NOT directly install discord_rpc, run <code>haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc</code> <br>
 <br>
 <br>
-<b>Game Issues: </b>br>
+<b>Game Issues: <br>
 <b> Windows: </b>
 Certain lua based HUD elements are not colored correctly/at all - This will be fixed in a minor patch, if you downloaded 0.6.0's windows build, update to 0.6.1 when it releases.
 
