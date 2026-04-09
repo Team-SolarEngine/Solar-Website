@@ -10,9 +10,9 @@
 <br>
 <br>
 <p style="font-size: 50vw">Compiling Issues: </p><br>
-Unknown class MP4Handler |  Downgrade hxCodec to 2.5.1 haxelib set hxCodec 2.5.1<br>
+Unknown class MP4Handler |  Downgrade hxCodec to 2.5.1 <code>haxelib set hxCodec 2.5.1</code><br>
 <br>
-discord_rpc | "fatal error C1083: Cannot open include file: '../lib/discord-rpc/include/discord-rpc.h': No such file or directory" | do NOT directly install discord_rpc, run haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc <br>
+discord_rpc | "fatal error C1083: Cannot open include file: '../lib/discord-rpc/include/discord-rpc.h': No such file or directory" | do NOT directly install discord_rpc, run <code>haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc</code> <br>
 <br>
 <br>
 <p style="font-size: 50vw">Game Issues: </p><br>
