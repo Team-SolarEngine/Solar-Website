@@ -5,8 +5,9 @@
 
 <main>
     <Topbar page={page}/>
-    
-    <span>The Wiki is not currently ready, take some commonly known bugs instead!<br>
+
+    <span>maybe later...</span>
+    <!-- <span>The Wiki is not currently ready, take some commonly known bugs instead!<br>
 <br>
 <br>
 <b>Compiling Issues: </b><br>
@@ -21,7 +22,7 @@ Certain lua based HUD elements are not colored correctly/at all - This will be f
 
 <b> Universal: </b>
 Result Screen does not properly exit song in some cases - Unknown Cause, cannot guarentee it will be able to be fixed.
-</span>
+</span> -->
 </main>
 
 <style>
