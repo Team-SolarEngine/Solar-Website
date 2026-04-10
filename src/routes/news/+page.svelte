@@ -5,7 +5,15 @@
 <main>
  <Topbar page={page}/>
 
-  <span> This is where the Solar Engine news would go...<br><br>IF I HAD ONE!</span>
+<span>
+        <div class="main">
+            <div class="mainContent background">
+                <section class="info">
+                    This is where the Solar Engine news would go...<br><br>IF I HAD ONE!
+                </section>
+            <div>
+        </div>
+    </span>
 </main>
 
 <style>
