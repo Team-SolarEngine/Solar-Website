@@ -2,16 +2,17 @@
     import Topbar from '../../webpack/topbar.svelte';
     const page = 'news';
 </script>
-<main>
- <Topbar page={page}/>
 
-<span>
+<main>
+    <Topbar page={page}/>
+
+    <span>
         <div class="main">
             <div class="mainContent background">
                 <section class="info">
                     This is where the Solar Engine news would go...<br><br>IF I HAD ONE!
                 </section>
-            <div>
+            </div>
         </div>
     </span>
 </main>
