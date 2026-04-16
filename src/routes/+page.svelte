@@ -76,7 +76,7 @@
             <div class="devs">
                 <div class="dev">
                     <a href="https://codedave.pages.dev/">
-                        <img src="https://codedave.pages.dev/assets/misc/Daveberry%20Wave.png" alt="Daveberry" width="150">
+                        <img src="https://codedave.pages.dev/assets/images/Daveberry%20Wave.png" alt="Daveberry" width="150">
                         <h2 class="daveberry">Daveberry</h2>
                         <p>Former developer. Creator of the engine, and lead developer of the website.</p>
                     </a>
@@ -92,7 +92,7 @@
                 
                 <div class="dev">
                     <a href="https://baranmuzu.netlify.app/">
-                        <img src="https://baranmuzu.netlify.app/images/baransleep.png" alt="Baran" width="150">
+                        <img src="https://baranmuzu.netlify.app/assets/images/baransleep.png" alt="Baran" width="150">
                         <h2 class="baran">Baran</h2>
                         <p>Invited former developer.</p>
                     </a>
