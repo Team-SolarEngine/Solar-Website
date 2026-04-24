@@ -1,17 +1,28 @@
 import { json, error } from '@sveltejs/kit';
 import path from 'path';
-import fs from 'fs';
 
-async function main(file, url) {
+async function main(file, newsFiles) {
+  if (!file) {
+    throw error(400, 'File name is required');
+  }
+
   const sanitizedName = path.basename(file);
-  const filePath = path.join(url, sanitizedName);
+  const newsEntry = Object.entries(newsFiles).find(([filePath]) => {
+    return path.basename(filePath) === sanitizedName;
+  });
   
   try {
-    if (!fs.existsSync(filePath)) throw error(404, 'File not found');
-    
-    const content = fs.readFileSync(filePath, 'utf-8');
+    if (!newsEntry) {
+      throw error(404, 'File not found');
+    }
+
+    const content = newsEntry[1];
     return json({ content });
-  } catch {
+  } catch (err) {
+    if (err?.status) {
+      throw err;
+    }
+
     throw error(500, 'Error reading file content');
   }
 }

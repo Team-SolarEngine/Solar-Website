@@ -1,13 +1,12 @@
 import { json, error } from '@sveltejs/kit';
-import fs from 'fs';
 import path from 'path';
 
-async function main(url) {
+async function main(newsFiles) {
   try {
-    const dirPath = path.resolve(url);
-    const files = fs.readdirSync(dirPath);
-    
-    const markdownFiles = files.filter(file => file.endsWith('.md'));
+    const markdownFiles = Object.keys(newsFiles)
+      .map((filePath) => path.basename(filePath))
+      .sort();
+
     return json(markdownFiles);
   } catch (err) {
     console.error(err);
