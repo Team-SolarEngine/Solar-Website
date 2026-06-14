@@ -1,5 +1,6 @@
 **Date**: 14th June 2026 <br/>
-**Creator**: Daveberry Cricket Blueson
+**Creator**: Daveberry Cricket Blueson <br/>
+**Raw File**: https://github.com/Team-SolarEngine/Solar-Website/blob/main/static/wiki/Common%20Issues.md
 
 ---
 
@@ -20,10 +21,10 @@ Here are some known/common issues with Solar Engines. These may be out of date, 
 ## Game Issues
 ### Windows:
 - ~~Certain lua based HUD elements are not colored correctly/at all~~
-  - Issue has been fixed. Update to 0.6.1
+  - Issue has been fixed. Update to/Re-install 0.6.1
 - ~~Changing volume crashes the game~~
-  - Recent update has been fixed. Update to 0.6.1
+  - Recent update has been fixed. Update to/Re-install 0.6.1
 
 ### Universal:
 - ~~Result Screen does not properly exit song in some cases~~
-  - Issue has been fixed. Update to 0.6.1
+  - Issue has been fixed. Update to/Re-install 0.6.1
