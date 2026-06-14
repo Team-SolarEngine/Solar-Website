@@ -11,7 +11,7 @@
     let errorNewsFile = $state(false);
     
     let newsMarkdown = $state(''); 
-    /** @type {string[]} */
+    /** @type {{ file: string, dateStr: string }[]} */
     let newsList = $state([]);
 
     async function getNews() {
@@ -66,9 +66,9 @@
                 <p>Error loading news.</p>
             {:else}
                 <div class="fileList">
-                    {#each newsList as file}
-                        <button class="fileButton" onclick={() => selectNews(file)}>
-                            {file.replace('.md', '')}
+                    {#each newsList as article}
+                        <button class="fileButton" onclick={() => selectNews(article.file)}>
+                            {article.file.replace('.md', '')}
                         </button>
                     {/each}
                 </div>

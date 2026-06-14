@@ -27,12 +27,11 @@ export async function GET({ url }) {
   }
 
   if (action === 'getMarkdowns') {
-    return await getMarkdowns(markdownFiles);
+    const isNews = type === 'news';
+    return await getMarkdowns(markdownFiles, isNews);
   } else if (action === 'getMarkdownFile') {
     const fileName = url.searchParams.get('f');
-    if (!fileName) {
-      throw error(400, 'File name is required');
-    }
+    if (!fileName) {throw error(400, 'File name is required');}
     return await getMarkdownFile(fileName, markdownFiles)
   }
 
