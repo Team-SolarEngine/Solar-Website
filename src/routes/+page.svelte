@@ -67,6 +67,13 @@
                 >
                     Go to GitHub Organization
                 </a>
+
+                <a
+                    href="https://discord.gg/RaHmP5fgyA"
+                    target="_blank"
+                >
+                    Join Discord Server
+                </a>
             </section>
         </div>
         

@@ -1,9 +1,10 @@
 import { json, error } from '@sveltejs/kit';
 import path from 'path';
 
-async function main(newsFiles) {
+/** @param {Record<string, string>} markdownFile */
+async function main(markdownFile) {
   try {
-    const markdownFiles = Object.keys(newsFiles)
+    const markdownFiles = Object.keys(markdownFile)
       .map((filePath) => path.basename(filePath))
       .sort();
 

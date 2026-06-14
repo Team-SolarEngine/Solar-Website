@@ -1,13 +1,14 @@
 import { json, error } from '@sveltejs/kit';
 import path from 'path';
 
-async function main(file, newsFiles) {
+/** @param {string} file @param {Record<string, string>} markdownFiles */
+async function main(file, markdownFiles) {
   if (!file) {
     throw error(400, 'File name is required');
   }
 
   const sanitizedName = path.basename(file);
-  const newsEntry = Object.entries(newsFiles).find(([filePath]) => {
+  const newsEntry = Object.entries(markdownFiles).find(([filePath]) => {
     return path.basename(filePath) === sanitizedName;
   });
   
@@ -19,7 +20,7 @@ async function main(file, newsFiles) {
     const content = newsEntry[1];
     return json({ content });
   } catch (err) {
-    if (err?.status) {
+    if (err && typeof err === 'object' && 'status' in err && err.status) {
       throw err;
     }
 

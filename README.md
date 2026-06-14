@@ -11,16 +11,19 @@ The site is still under construction but it will be the host for the wiki as wel
 
 - [ ] Make a wiki page on Engine Release
 - [ ] Make a versions list with links that direct download the version
-- [ ] Actually add the news page
+- [x] Actually add the news page
 
 ### Building the website from source
 
  Clone the repo then in the folder containing the website run the following:
 
 ```batch
-npm install
-npm run build
-npm run preview
+pnpm install
+pnpm run build
+pnpm run preview
 ```
 
 This will install all the neccassary files, build the website then host it at localhost.
+
+> [!WARNING]
+> We reccomending using `pnpm` for development, as it is faster and safer than `npm` nowadays.

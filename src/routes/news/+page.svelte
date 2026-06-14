@@ -11,11 +11,12 @@
     let errorNewsFile = $state(false);
     
     let newsMarkdown = $state(''); 
-    let newsList = $state([]);     
+    /** @type {string[]} */
+    let newsList = $state([]);
 
     async function getNews() {
         try {
-            const response = await fetch("/api/news?act=getNews");
+            const response = await fetch("/api/getmarkdown?type=news&act=getMarkdowns");
             if (!response.ok) throw new Error();
             return await response.json();
         } catch {
@@ -26,11 +27,12 @@
         }
     }
     
+    /** @param {string} file */
     async function getNewsFile(file) {
         loadNewsFile = true;
         errorNewsFile = false;
         try {
-            const response = await fetch(`/api/news?act=getNewsFile&f=${encodeURIComponent(file)}`);
+            const response = await fetch(`/api/getmarkdown?type=news&act=getMarkdownFile&f=${encodeURIComponent(file)}`);
             if (!response.ok) throw new Error();
             return await response.json();
         } catch {
@@ -41,6 +43,7 @@
         }
     }
 
+    /** @param {string} file */
     async function selectNews(file) {
         const data = await getNewsFile(file);
         newsMarkdown = data.content;
