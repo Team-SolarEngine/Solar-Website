@@ -136,6 +136,8 @@
             .prose {
                 :global(h1) { font-size: 2rem; margin-bottom: 1rem; }
                 :global(p) { margin-bottom: 1rem; line-height: 1.6; }
+                :global(code) { background: rgba(0, 0, 0, 0.5); border-radius: 4px; user-select: all; }
+                :global(a) { color: aqua; }
             }
         }
     }
