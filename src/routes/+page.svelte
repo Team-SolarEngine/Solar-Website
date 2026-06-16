@@ -185,6 +185,7 @@
                 flex-direction: row;
                 justify-content: center;
                 gap: 10px;
+                flex-wrap: wrap;
                 
                 .dev {
                     width: 15rem;
@@ -199,7 +200,7 @@
                     
                     .daveberry { color: #008BFF; }
                     .videobot { color: #00FFFF; }
-                    .baran { color: #00FF00; }
+                    .baranmuzu { color: #00FF00; }
                     .char { color: #FF8800; }
                 }
             }

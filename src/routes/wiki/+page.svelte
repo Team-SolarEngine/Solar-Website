@@ -22,7 +22,6 @@
     let errorFile = $state(false);
     
     let wikiContent = $state(''); 
-    /** @type {string[]} */
     let wikiList = $state([]);
 
     async function getWikiList() {
@@ -37,8 +36,7 @@
             loadList = false;
         }
     }
-    
-    /** @param {string} file */
+
     async function getWikiFile(file) {
         loadFile = true;
         errorFile = false;
@@ -54,7 +52,6 @@
         }
     }
 
-    /** @param {string} file */
     async function selectWiki(file) {
         const data = await getWikiFile(file);
         wikiContent = data.content;
@@ -114,12 +111,13 @@
         flex: 1;
         min-height: 0;
         overflow: hidden;
+        @media screen and (max-width: 768px) { flex-direction: column; }
 
         .sidebar {
             min-width: 250px;
             padding: 15px;
             overflow-y: auto;
-            border-right: 1px solid var(--border);
+            @media screen and (min-width: 768px) { border-right: 1px solid var(--border); }
             background-color: rgba(255, 255, 255, 0.025);
 
             h3 { margin-top: 0; }
@@ -128,6 +126,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
+                max-height: 150px;
 
                 .fileButton {
                     background: none;

@@ -1,7 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import path from 'path';
 
-/** @param {string} file @param {Record<string, string>} markdownFiles */
 async function main(file, markdownFiles) {
   if (!file) {
     throw error(400, 'File name is required');

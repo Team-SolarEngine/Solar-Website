@@ -17,6 +17,7 @@
         align-items: center;
         padding: 1rem;
         background-color: rgba(25, 25, 25, 1);
+        @media screen and (max-width: 768px) { justify-content: center; align-items: center; }
         
         .buttons {
             display: flex;
