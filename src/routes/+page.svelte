@@ -38,6 +38,20 @@
         githubRepos_error = true;
       }
     }
+
+    const downloadButtons = [
+      { name: `Download Latest ${engineVersionBuild}`, url: 'https://github.com/Team-SolarEngine/Solar-Engine-Archive/releases/latest' },
+      { name: `Go to GitHub Repository`, url: 'https://github.com/Team-SolarEngine/Solar-Engine-Archive' },
+      { name: `Go to GitHub Organization`, url: 'https://github.com/Team-SolarEngine' },
+      { name: `Join Discord Server`, url: 'https://discord.gg/RaHmP5fgyA' },
+    ]
+
+    const contributors = [
+      { name: 'Daveberry', url: 'https://codedave.pages.dev/', role: 'Former developer. Creator of the engine, and lead developer of the website.', avatar: 'https://codedave.pages.dev/assets/images/Daveberry%20Wave.png', circlePFP: false },
+      { name: 'VideoBot', url: 'https://video-bot.netlify.app/', role: 'Lead developer. Creator of the engine.', avatar: 'https://video-bot.netlify.app/_app/immutable/assets/VideoBot.BjIP8NLq.png', circlePFP: true },
+      { name: 'BaranMuzu', url: 'https://baranmuzu.netlify.app/', role: 'Invited former developer.', avatar: 'https://baranmuzu.netlify.app/assets/images/baransleep.png', circlePFP: false },
+      { name: 'Char', url: 'https://vschar-official.com/', role: 'Invited lead developer.', avatar: 'https://avatars.githubusercontent.com/u/73309364?v=4?s=400', circlePFP: false },
+    ]
     
     onMount(() => {
         fetchEngineVersion();
@@ -64,70 +78,31 @@
             </section>
             
             <section class="downloads">
-                <a
-                    href="https://github.com/Team-SolarEngine/Solar-Engine-Archive/releases/latest/"
-                    target="_blank"
-                >
-                    Download latest ({engineVersionBuild})
-                </a>
-                
-                <a
-                    href="https://github.com/Team-SolarEngine/Solar-Engine-Archive/"
-                    target="_blank"
-                >
-                    Go to GitHub Repository
-                </a>
-                
-                <a
-                    href="https://github.com/Team-SolarEngine/"
-                    target="_blank"
-                >
-                    Go to GitHub Organization
-                </a>
-
-                <a
-                    href="https://discord.gg/RaHmP5fgyA"
-                    target="_blank"
-                >
-                    Join Discord Server
-                </a>
+                {#each downloadButtons as button}
+                    <a
+                        href={button.url}
+                        target="_blank"
+                    >
+                        {button.name}
+                    </a>
+                {/each}
             </section>
         </div>
         
         <div class="background meetthedevs">
             <h1>Meet the devs!</h1>
             <div class="devs">
-                <div class="dev">
-                    <a href="https://codedave.pages.dev/">
-                        <img src="https://codedave.pages.dev/assets/images/Daveberry%20Wave.png" alt="Daveberry" width="150">
-                        <h2 class="daveberry">Daveberry</h2>
-                        <p>Former developer. Creator of the engine, and lead developer of the website.</p>
-                    </a>
-                </div>
-                
-                <div class="dev">
-                    <a href="https://video-bot.netlify.app/">
-                        <img src="https://video-bot.netlify.app/_app/immutable/assets/VideoBot.BjIP8NLq.png" alt="VideoBot" width="150" class="circlePFP">
-                        <h2 class="videobot">VideoBot</h2>
-                        <p>Lead developer. Creator of the engine.</p>
-                    </a>
-                </div>
-                
-                <div class="dev">
-                    <a href="https://baranmuzu.netlify.app/">
-                        <img src="https://baranmuzu.netlify.app/assets/images/baransleep.png" alt="Baran" width="150">
-                        <h2 class="baran">Baran</h2>
-                        <p>Invited former developer.</p>
-                    </a>
-                </div>
-                
-                <div class="dev">
-                    <a href="https://vschar-official.com/">
-                        <img src="https://avatars.githubusercontent.com/u/73309364?v=4?s=400" alt="Char" width="150">
-                        <h2 class="char">Char</h2>
-                        <p>Invited lead developer.</p>
-                    </a>
-                </div>
+                {#each contributors as contributor}
+                    <div class="dev">
+                        <a href={contributor.url}>
+                            <img src={contributor.avatar} alt={contributor.name} class:circlePFP={contributor.circlePFP} width="150">
+                            <h2 class={contributor.name.toLowerCase()}>
+                                {contributor.name}
+                            </h2>
+                            <p>{contributor.role}</p>
+                        </a>
+                    </div>
+                {/each}
             </div>
         </div>
 
