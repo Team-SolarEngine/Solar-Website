@@ -1,7 +1,18 @@
 <script lang="js">
     import { onMount } from 'svelte';
     import { marked } from 'marked';
+    import { markedHighlight } from 'marked-highlight';
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/github-dark.css';
     import Topbar from '../../webpack/topbar.svelte';
+
+    marked.use(markedHighlight({
+        langPrefix: 'hljs language',
+        highlight(code, lang) {
+            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+            return hljs.highlight(code, { language }).value;
+        }
+    }));
 
     const page = 'wiki';
     
@@ -144,7 +155,7 @@
             .prose {
                 :global(h1) { font-size: 2rem; margin-bottom: 1rem; }
                 :global(p) { margin-bottom: 1rem; line-height: 1.6; }
-                :global(code) { background: rgba(0, 0, 0, 0.5); border-radius: 4px; user-select: all; }
+                :global(code) { background: rgba(0, 0, 0, 0.5); border-radius: 4px; }
                 :global(a) { color: aqua; }
                 :global(pre) {
                     background: rgba(0, 0, 0, 0.5);

@@ -14,6 +14,7 @@ There are two ways to create a modchart. Using the modchart editor, or using pur
 
 ## Modchart Editor
 When launched into a song, press `9` in your keybind (or a different keybind you set in your controls) to open the modchart editor. Here's what the modchart editor looks like:
+
 <img src="/wiki/pictures/Modcharting_Preview.png" alt="Modchart Editor" width="800"/>
 
 Things you need to know:
@@ -30,7 +31,7 @@ This is not reccomended for people who just started learning modcharting. It req
 Inside of a `data` song file. Example: `assets/data/dad-battle/`, create a `modchart.lua` file. Once inside of the file, you're gonna need to copy the following for a template:
 ```lua
 -- Q: Why onCreatePost instead of onStepHit or onBeatHit?
--- A: The modchart tool is just like that. We don't know why, and it's probably for the best, since the modchart tool uses `beat` instead of `onStepHit` or `onBeatHit`.
+-- A: The modchart tool handles the event timeline and is much better. Ease events dont get screwed up when lag spikes occur or when you skip time (also onStepHit and onBeatHit is just bad in general...)
 function onCreatePost()
     addModcharts()
     startModchartEvents()
