@@ -67,4 +67,5 @@ If you can't read (for some reason), check out these videos and also an example.
 - Creating custom modifies in HScript: https://www.youtube.com/watch?v=0wAi7aUI4hY
 - Code examples: https://github.com/EdwhakKB/FNF-Modcharting-Tools/blob/main/examples/psych/script.lua
 
-They're great for learning how to make modcharts. If you're ever stuck, feel free to ask for help in the [Discord server](https://discord.gg/RaHmP5fgyA)! All developers there are active and will be happy to help.
+They're great for learning how to make modcharts. If you're ever stuck, feel free to ask for help in the [Discord server](https://discord.gg/RaHmP5fgyA)! All developers there r
+that might be active and might be happy to help.
