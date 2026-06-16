@@ -5,11 +5,11 @@
 
 :root{
     --background: #723C99;
+    --border: rgba(255, 255, 255, 0.25);
 }
 
 body {
-    background: var(--background) url('/assets/checkers.png');
-    animation: backdropillusion 4s linear infinite;
+    background-color: rgba(20, 20, 20, 1);
     color: white;
     font-family: funkin;
     
@@ -19,17 +19,11 @@ body {
     overflow-x: hidden;
 }
 
-@keyframes backdropillusion {
-    to { background-position: top 118px left 118px; }
-}
-
 * {
     -webkit-user-drag: none;
 }
 
 .background {
-    background-color: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(4px);
-    padding: 20px;
-    border-radius: 10px;
+    border-top: 1px solid var(--border);
+    padding: 10px;
 }

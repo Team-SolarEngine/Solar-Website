@@ -1,7 +1,18 @@
 <script lang="js">
     import { onMount } from 'svelte';
     import { marked } from 'marked';
+    import { markedHighlight } from 'marked-highlight';
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/github-dark.css';
     import Topbar from '../../webpack/topbar.svelte';
+
+    marked.use(markedHighlight({
+        langPrefix: 'hljs language-',
+        highlight(code, lang) {
+            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+            return hljs.highlight(code, { language }).value;
+        }
+    }));
 
     const page = 'news';
     
@@ -54,7 +65,7 @@
     });
 </script>
 
-<main>
+<main class="page">
     <Topbar page={page}/>
 
     <div class="main">
@@ -85,23 +96,31 @@
                     {@html marked.parse(newsMarkdown)}
                 </article>
             {:else}
-                <p>Select an article.</p>
+                <p>Select one of the few news we have.</p>
             {/if}
         </div>
     </div>
 </main>
 
 <style>
-    .main {
-        padding: 20px;
+    .page {
         display: flex;
-        gap: 15px;
-        height: 88vh;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .main {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
 
         .sidebar {
-            flex: 1;
+            min-width: 250px;
             padding: 15px;
             overflow-y: auto;
+            border-right: 1px solid var(--border);
+            background-color: rgba(255, 255, 255, 0.025);
 
             h3 { margin-top: 0; }
 

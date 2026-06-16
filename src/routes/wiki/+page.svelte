@@ -54,7 +54,7 @@
     });
 </script>
 
-<main>
+<main class="page">
     <Topbar page={page}/>
 
     <div class="main">
@@ -92,16 +92,24 @@
 </main>
 
 <style>
-    .main {
-        padding: 20px;
+    .page {
         display: flex;
-        gap: 15px;
-        height: 88vh;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .main {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
 
         .sidebar {
-            flex: 1;
+            min-width: 250px;
             padding: 15px;
             overflow-y: auto;
+            border-right: 1px solid var(--border);
+            background-color: rgba(255, 255, 255, 0.025);
 
             h3 { margin-top: 0; }
 
@@ -138,6 +146,19 @@
                 :global(p) { margin-bottom: 1rem; line-height: 1.6; }
                 :global(code) { background: rgba(0, 0, 0, 0.5); border-radius: 4px; user-select: all; }
                 :global(a) { color: aqua; }
+                :global(pre) {
+                    background: rgba(0, 0, 0, 0.5);
+                    border-radius: 4px;
+                    padding: 15px;
+                    margin-bottom: 1rem;
+                    overflow-x: auto;
+                    white-space: pre;
+                }
+                :global(pre code) {
+                    background: none;
+                    padding: 0;
+                    border-radius: 0;
+                }
             }
         }
     }

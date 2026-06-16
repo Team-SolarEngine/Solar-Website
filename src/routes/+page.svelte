@@ -118,8 +118,6 @@
 
 <style>
     .main {
-        padding: 20px;
-        
         .mainContent {
             display: flex;
             flex-direction: row;
@@ -158,36 +156,34 @@
                 }
             }
         }
-    }
-    
-    .meetthedevs {
-        margin-top: 10px;
-        
-        .devs {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 10px;
-            
-            .dev {
-                width: 15rem;
-                text-align: center;
+
+        .meetthedevs {
+            .devs {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
                 
-                a {
-                    text-decoration: none;
-                    color: white;
-                } .circlePFP {
-                    border-radius: 50%;
-                }
-                
-                .daveberry {
-                    color: #008BFF;
-                } .videobot {
-                    color: #00FFFF;
-                } .baran {
-                    color: #00FF00;
-                } .char {
-                    color: #FF8800;
+                .dev {
+                    width: 15rem;
+                    text-align: center;
+                    
+                    a {
+                        text-decoration: none;
+                        color: white;
+                    } .circlePFP {
+                        border-radius: 50%;
+                    }
+                    
+                    .daveberry {
+                        color: #008BFF;
+                    } .videobot {
+                        color: #00FFFF;
+                    } .baran {
+                        color: #00FF00;
+                    } .char {
+                        color: #FF8800;
+                    }
                 }
             }
         }
