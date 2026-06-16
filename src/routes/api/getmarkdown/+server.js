@@ -6,16 +6,15 @@ export async function GET({ url }) {
   const action = url.searchParams.get('act');
   const type = url.searchParams.get('type'); // either news or wiki
 
-  /** @type {Record<string, string> | undefined} */
   let markdownFiles;
   if (type === 'news') {
-    markdownFiles = /** @type {Record<string, string>} */ (import.meta.glob('/static/news/*.md', {
+    markdownFiles = (import.meta.glob('/static/news/*.md', {
       eager: true,
       query: '?raw',
       import: 'default'
     }));
   } else if (type === 'wiki') {
-    markdownFiles = /** @type {Record<string, string>} */ (import.meta.glob('/static/wiki/*.md', {
+    markdownFiles = (import.meta.glob('/static/wiki/*.md', {
       eager: true,
       query: '?raw',
       import: 'default'

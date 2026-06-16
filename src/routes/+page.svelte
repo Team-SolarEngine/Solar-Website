@@ -3,6 +3,10 @@
     import Topbar from '../webpack/topbar.svelte';
     const page = 'home';
 
+    let githubRepos = $state([]);
+    let githubRepos_loading = $state(true);
+    let githubRepos_error = $state(false);
+    
     let engineVersionBuild = $state('null');
     const engineVersionURL = 'https://raw.githubusercontent.com/Team-SolarEngine/Solar-Engine-Archive/main/gitVersion.txt';
     
@@ -22,9 +26,22 @@
             engineVersionBuild = 'null';
         }
     }
+
+    async function fetchGithubRepos() {
+      try {
+        const response = await fetch("/api/github?type=repos")
+        if (response.ok) { githubRepos = (await response.json()).data; }
+        else { console.error('Failed to fetch GitHub repos. Status:', response.status); githubRepos_error = true; }
+        githubRepos_loading = false;
+      } catch (error) {
+        console.error('Exception while fetching GitHub repos:', error);
+        githubRepos_error = true;
+      }
+    }
     
     onMount(() => {
         fetchEngineVersion();
+        fetchGithubRepos();
     });
 </script>
 
@@ -113,6 +130,36 @@
                 </div>
             </div>
         </div>
+
+        <div class="background githubRepos">
+            <h1>GitHub Repositories</h1>
+            <div class="repoGroup">
+                {#if githubRepos.length > 0}
+                    {#each githubRepos as repo}
+                        <a class="repoCard" href={repo.url}>
+                            <div class="repoInfo">
+                                <span class="bigText">{repo.name}</span>
+                                
+                                {#if repo.description}
+                                    <p>{repo.description}</p>
+                                {:else}
+                                    <p>No description available.</p>
+                                {/if}
+                            </div>
+    
+                            <div class="repoDetails">
+                                <span>{repo.stars} stars</span> -
+                                <span>{repo.forks} forks</span>
+                            </div>
+                        </a>
+                    {/each}
+                {:else if githubRepos_error}
+                    <p>Failed to fetch repositories. Check the console for more details.</p>
+                {:else if githubRepos_loading}
+                    <p>Fetching the repositories...</p>
+                {/if}
+            </div>
+        </div>
     </div>
 </main>
 
@@ -175,14 +222,32 @@
                         border-radius: 50%;
                     }
                     
-                    .daveberry {
-                        color: #008BFF;
-                    } .videobot {
-                        color: #00FFFF;
-                    } .baran {
-                        color: #00FF00;
-                    } .char {
-                        color: #FF8800;
+                    .daveberry { color: #008BFF; }
+                    .videobot { color: #00FFFF; }
+                    .baran { color: #00FF00; }
+                    .char { color: #FF8800; }
+                }
+            }
+        }
+
+        .githubRepos {
+            .repoGroup {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+
+                .repoCard {
+                    text-decoration: none;
+                    color: white;
+                    background-color: rgba(0, 0, 0, 0.1);
+                    padding: 10px 15px;
+                    border-radius: 10px;
+                    transition: background-color 0.1s ease;
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.3);
                     }
                 }
             }

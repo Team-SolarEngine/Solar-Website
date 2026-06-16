@@ -1,6 +1,5 @@
 import adapter from '@sveltejs/adapter-netlify';
 
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
 	compilerOptions: {
 		// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
