@@ -26,8 +26,8 @@
     function copyToClipboard(type) {
       let realFileName = fileName.replace(/\s+/g, '%20')
       
-      let format = `**Date**: ${getFormattedDate()}
-**Creator**: ${creator}
+      let format = `**Date**: ${getFormattedDate()} <br/>
+**Creator**: ${creator} <br/>
 **Raw File**: https://github.com/Team-SolarEngine/Solar-Website/blob/main/static/${type}/${realFileName}.md
 
 ---
