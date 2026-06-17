@@ -3,6 +3,10 @@
     import Topbar from '../webpack/topbar.svelte';
     const page = 'home';
 
+    let githubRepos = $state([]);
+    let githubRepos_loading = $state(true);
+    let githubRepos_error = $state(false);
+    
     let engineVersionBuild = $state('null');
     const engineVersionURL = 'https://raw.githubusercontent.com/Team-SolarEngine/Solar-Engine-Archive/main/gitVersion.txt';
     
@@ -22,9 +26,36 @@
             engineVersionBuild = 'null';
         }
     }
+
+    async function fetchGithubRepos() {
+      try {
+        const response = await fetch("/api/github?type=repos")
+        if (response.ok) { githubRepos = (await response.json()).data; }
+        else { console.error('Failed to fetch GitHub repos. Status:', response.status); githubRepos_error = true; }
+        githubRepos_loading = false;
+      } catch (error) {
+        console.error('Exception while fetching GitHub repos:', error);
+        githubRepos_error = true;
+      }
+    }
+
+    const downloadButtons = [
+      { name: `Download Latest ${engineVersionBuild}`, url: 'https://github.com/Team-SolarEngine/Solar-Engine-Archive/releases/latest' },
+      { name: `Go to GitHub Repository`, url: 'https://github.com/Team-SolarEngine/Solar-Engine-Archive' },
+      { name: `Go to GitHub Organization`, url: 'https://github.com/Team-SolarEngine' },
+      { name: `Join Discord Server`, url: 'https://discord.gg/RaHmP5fgyA' },
+    ]
+
+    const contributors = [
+      { name: 'Daveberry', url: 'https://codedave.pages.dev/', role: 'Former developer. Creator of the engine, and lead developer of the website.', avatar: 'https://codedave.pages.dev/assets/images/Daveberry%20Wave.png', circlePFP: false },
+      { name: 'VideoBot', url: 'https://video-bot.netlify.app/', role: 'Lead developer. Creator of the engine.', avatar: 'https://video-bot.netlify.app/_app/immutable/assets/VideoBot.BjIP8NLq.png', circlePFP: true },
+      { name: 'BaranMuzu', url: 'https://baranmuzu.netlify.app/', role: 'Invited former developer.', avatar: 'https://baranmuzu.netlify.app/assets/images/baransleep.png', circlePFP: false },
+      { name: 'Char', url: 'https://vschar-official.com/', role: 'Invited lead developer.', avatar: 'https://avatars.githubusercontent.com/u/73309364?v=4?s=400', circlePFP: false },
+    ]
     
     onMount(() => {
         fetchEngineVersion();
+        fetchGithubRepos();
     });
 </script>
 
@@ -47,70 +78,61 @@
             </section>
             
             <section class="downloads">
-                <a
-                    href="https://github.com/Team-SolarEngine/Solar-Engine-Archive/releases/latest/"
-                    target="_blank"
-                >
-                    Download latest ({engineVersionBuild})
-                </a>
-                
-                <a
-                    href="https://github.com/Team-SolarEngine/Solar-Engine-Archive/"
-                    target="_blank"
-                >
-                    Go to GitHub Repository
-                </a>
-                
-                <a
-                    href="https://github.com/Team-SolarEngine/"
-                    target="_blank"
-                >
-                    Go to GitHub Organization
-                </a>
-
-                <a
-                    href="https://discord.gg/RaHmP5fgyA"
-                    target="_blank"
-                >
-                    Join Discord Server
-                </a>
+                {#each downloadButtons as button}
+                    <a
+                        href={button.url}
+                        target="_blank"
+                    >
+                        {button.name}
+                    </a>
+                {/each}
             </section>
         </div>
         
         <div class="background meetthedevs">
             <h1>Meet the devs!</h1>
             <div class="devs">
-                <div class="dev">
-                    <a href="https://codedave.pages.dev/">
-                        <img src="https://codedave.pages.dev/assets/images/Daveberry%20Wave.png" alt="Daveberry" width="150">
-                        <h2 class="daveberry">Daveberry</h2>
-                        <p>Former developer. Creator of the engine, and lead developer of the website.</p>
-                    </a>
-                </div>
-                
-                <div class="dev">
-                    <a href="https://video-bot.netlify.app/">
-                        <img src="https://video-bot.netlify.app/_app/immutable/assets/VideoBot.BjIP8NLq.png" alt="VideoBot" width="150" class="circlePFP">
-                        <h2 class="videobot">VideoBot</h2>
-                        <p>Lead developer. Creator of the engine.</p>
-                    </a>
-                </div>
-                
-                <div class="dev">
-                    <a href="https://baranmuzu.netlify.app/">
-                        <img src="https://baranmuzu.netlify.app/assets/images/baransleep.png" alt="Baran" width="150">
-                        <h2 class="baran">Baran</h2>
-                        <p>Invited former developer.</p>
-                    </a>
-                </div>
-                
-                <div class="dev">
-                    <a href="https://vschar-official.com/">
-                        <img src="https://avatars.githubusercontent.com/u/73309364?v=4?s=400" alt="Char" width="150">
-                        <h2 class="char">Char</h2>
-                        <p>Invited lead developer.</p>
-                    </a>
-                </div>
+                {#each contributors as contributor}
+                    <div class="dev">
+                        <a href={contributor.url}>
+                            <img src={contributor.avatar} alt={contributor.name} class:circlePFP={contributor.circlePFP} width="150">
+                            <h2 class={contributor.name.toLowerCase()}>
+                                {contributor.name}
+                            </h2>
+                            <p>{contributor.role}</p>
+                        </a>
+                    </div>
+                {/each}
+            </div>
+        </div>
+
+        <div class="background githubRepos">
+            <h1>GitHub Repositories</h1>
+            <div class="repoGroup">
+                {#if githubRepos.length > 0}
+                    {#each githubRepos as repo}
+                        <a class="repoCard" href={repo.url}>
+                            <div class="repoInfo">
+                                <span class="bigText">{repo.name}</span>
+                                
+                                {#if repo.description}
+                                    <p>{repo.description}</p>
+                                {:else}
+                                    <p>No description available.</p>
+                                {/if}
+                            </div>
+    
+                            <div class="repoDetails">
+                                <span>{repo.stars} stars</span> -
+                                <span>{repo.forks} forks</span>
+                            </div>
+                        </a>
+                    {/each}
+                {:else if githubRepos_error}
+                    <p>Failed to fetch repositories. Check the console for more details.</p>
+                {:else if githubRepos_loading}
+                    <p>Fetching the repositories...</p>
+                {/if}
             </div>
         </div>
     </div>
@@ -118,8 +140,6 @@
 
 <style>
     .main {
-        padding: 20px;
-        
         .mainContent {
             display: flex;
             flex-direction: row;
@@ -158,36 +178,53 @@
                 }
             }
         }
-    }
-    
-    .meetthedevs {
-        margin-top: 10px;
-        
-        .devs {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 10px;
-            
-            .dev {
-                width: 15rem;
-                text-align: center;
+
+        .meetthedevs {
+            .devs {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+                flex-wrap: wrap;
                 
-                a {
+                .dev {
+                    width: 15rem;
+                    text-align: center;
+                    
+                    a {
+                        text-decoration: none;
+                        color: white;
+                    } .circlePFP {
+                        border-radius: 50%;
+                    }
+                    
+                    .daveberry { color: #008BFF; }
+                    .videobot { color: #00FFFF; }
+                    .baranmuzu { color: #00FF00; }
+                    .char { color: #FF8800; }
+                }
+            }
+        }
+
+        .githubRepos {
+            .repoGroup {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+
+                .repoCard {
                     text-decoration: none;
                     color: white;
-                } .circlePFP {
-                    border-radius: 50%;
-                }
-                
-                .daveberry {
-                    color: #008BFF;
-                } .videobot {
-                    color: #00FFFF;
-                } .baran {
-                    color: #00FF00;
-                } .char {
-                    color: #FF8800;
+                    background-color: rgba(0, 0, 0, 0.1);
+                    padding: 10px 15px;
+                    border-radius: 10px;
+                    transition: background-color 0.1s ease;
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.3);
+                    }
                 }
             }
         }

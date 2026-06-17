@@ -1,7 +1,18 @@
 <script lang="js">
     import { onMount } from 'svelte';
     import { marked } from 'marked';
+    import { markedHighlight } from 'marked-highlight';
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/github-dark.css';
     import Topbar from '../../webpack/topbar.svelte';
+
+    marked.use(markedHighlight({
+        langPrefix: 'hljs language',
+        highlight(code, lang) {
+            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+            return hljs.highlight(code, { language }).value;
+        }
+    }));
 
     const page = 'wiki';
     
@@ -11,7 +22,6 @@
     let errorFile = $state(false);
     
     let wikiContent = $state(''); 
-    /** @type {string[]} */
     let wikiList = $state([]);
 
     async function getWikiList() {
@@ -26,8 +36,7 @@
             loadList = false;
         }
     }
-    
-    /** @param {string} file */
+
     async function getWikiFile(file) {
         loadFile = true;
         errorFile = false;
@@ -43,7 +52,6 @@
         }
     }
 
-    /** @param {string} file */
     async function selectWiki(file) {
         const data = await getWikiFile(file);
         wikiContent = data.content;
@@ -54,7 +62,7 @@
     });
 </script>
 
-<main>
+<main class="page">
     <Topbar page={page}/>
 
     <div class="main">
@@ -92,16 +100,25 @@
 </main>
 
 <style>
-    .main {
-        padding: 20px;
+    .page {
         display: flex;
-        gap: 15px;
-        height: 88vh;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .main {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        @media screen and (max-width: 768px) { flex-direction: column; }
 
         .sidebar {
-            flex: 1;
+            min-width: 250px;
             padding: 15px;
             overflow-y: auto;
+            @media screen and (min-width: 768px) { border-right: 1px solid var(--border); }
+            background-color: rgba(255, 255, 255, 0.025);
 
             h3 { margin-top: 0; }
 
@@ -109,6 +126,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
+                max-height: 150px;
 
                 .fileButton {
                     background: none;
@@ -136,8 +154,21 @@
             .prose {
                 :global(h1) { font-size: 2rem; margin-bottom: 1rem; }
                 :global(p) { margin-bottom: 1rem; line-height: 1.6; }
-                :global(code) { background: rgba(0, 0, 0, 0.5); border-radius: 4px; user-select: all; }
+                :global(code) { background: rgba(0, 0, 0, 0.5); border-radius: 4px; }
                 :global(a) { color: aqua; }
+                :global(pre) {
+                    background: rgba(0, 0, 0, 0.5);
+                    border-radius: 4px;
+                    padding: 15px;
+                    margin-bottom: 1rem;
+                    overflow-x: auto;
+                    white-space: pre;
+                }
+                :global(pre code) {
+                    background: none;
+                    padding: 0;
+                    border-radius: 0;
+                }
             }
         }
     }

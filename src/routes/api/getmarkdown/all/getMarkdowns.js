@@ -1,7 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import path from 'path';
 
-/** @param {Record<string, string>} markdownFile @param {boolean} isNews */
 async function main(markdownFile, isNews) {
   try {
     const markdownFiles = Object.keys(markdownFile)

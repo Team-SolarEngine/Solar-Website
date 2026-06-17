@@ -14,6 +14,7 @@ There are two ways to create a modchart. Using the modchart editor, or using pur
 
 ## Modchart Editor
 When launched into a song, press `9` in your keybind (or a different keybind you set in your controls) to open the modchart editor. Here's what the modchart editor looks like:
+
 <img src="/wiki/pictures/Modcharting_Preview.png" alt="Modchart Editor" width="800"/>
 
 Things you need to know:
@@ -30,7 +31,7 @@ This is not reccomended for people who just started learning modcharting. It req
 Inside of a `data` song file. Example: `assets/data/dad-battle/`, create a `modchart.lua` file. Once inside of the file, you're gonna need to copy the following for a template:
 ```lua
 -- Q: Why onCreatePost instead of onStepHit or onBeatHit?
--- A: The modchart tool is just like that. We don't know why, and it's probably for the best, since the modchart tool uses `beat` instead of `onStepHit` or `onBeatHit`.
+-- A: The modchart tool handles the event timeline and is much better. Ease events dont get screwed up when lag spikes occur or when you skip time (also onStepHit and onBeatHit is just bad in general...)
 function onCreatePost()
     addModcharts()
     startModchartEvents()
@@ -66,4 +67,4 @@ If you can't read (for some reason), check out these videos and also an example.
 - Creating custom modifies in HScript: https://www.youtube.com/watch?v=0wAi7aUI4hY
 - Code examples: https://github.com/EdwhakKB/FNF-Modcharting-Tools/blob/main/examples/psych/script.lua
 
-They're great for learning how to make modcharts. If you're ever stuck, feel free to ask for help in the [Discord server](https://discord.gg/RaHmP5fgyA)! All developers there are active and will be happy to help.
+They're great for learning how to make modcharts. If you're ever stuck, feel free to ask for help in the [Discord server](https://discord.gg/RaHmP5fgyA)! All developers there *might* be active and *might* be happy to help.
