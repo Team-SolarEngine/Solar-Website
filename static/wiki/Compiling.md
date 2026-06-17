@@ -8,8 +8,7 @@
 You need the following tools:
 - [Haxe](https://haxe.org/)
 - [git](https://git-scm.com/install/)
-- [Visual Studio 2019 Community](https://visualstudio.microsoft.com/vs/older-downloads/)
-  - Only required for windows. For MacOS and Linux, you can pass this.
+- [Visual Studio 2019 Community [Windows only]](https://visualstudio.microsoft.com/vs/older-downloads/)
   - Required packages:
     - Desktop development with C++
 

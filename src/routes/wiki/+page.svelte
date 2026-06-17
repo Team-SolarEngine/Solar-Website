@@ -93,7 +93,7 @@
                     {@html marked.parse(wikiContent)}
                 </article>
             {:else}
-                <p>Ouu shii 👀</p>
+                <p>Welcome to the Solar Engine Wiki! You can find entries on the left.</p>
             {/if}
         </div>
     </div>
