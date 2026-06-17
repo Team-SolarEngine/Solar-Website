@@ -39,12 +39,12 @@
       }
     }
 
-    const downloadButtons = [
+    let downloadButtons = $derived([
       { name: `Download Latest ${engineVersionBuild}`, url: 'https://github.com/Team-SolarEngine/Solar-Engine-Archive/releases/latest' },
       { name: `Go to GitHub Repository`, url: 'https://github.com/Team-SolarEngine/Solar-Engine-Archive' },
       { name: `Go to GitHub Organization`, url: 'https://github.com/Team-SolarEngine' },
       { name: `Join Discord Server`, url: 'https://discord.gg/RaHmP5fgyA' },
-    ]
+    ])
 
     const contributors = [
       { name: 'Daveberry', url: 'https://codedave.pages.dev/', role: 'Former developer. Creator of the engine, and lead developer of the website.', avatar: 'https://codedave.pages.dev/assets/images/Daveberry%20Wave.png', circlePFP: false },
