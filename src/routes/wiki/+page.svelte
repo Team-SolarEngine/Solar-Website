@@ -24,7 +24,7 @@
     let wikiContent = $state(''); 
     let wikiList = $state([]);
 
-    const loaded = get_loaded()
+    let loaded = $state();
 
     function get_loaded()
     {
@@ -77,6 +77,7 @@
     
     onMount(async () => {
         wikiList = await getWikiList();
+        loaded = get_loaded();
     });
 </script>
 
