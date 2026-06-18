@@ -28,7 +28,7 @@
 
     function get_loaded()
     {
-        let loaded = 'Welcome to the Solar Engine Wiki';
+        let loaded = 'Welcome to the Solar Engine Wiki ';
 
         if (window.innerWidth <= 768)
         {
