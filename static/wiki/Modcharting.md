@@ -9,6 +9,7 @@ Here's how to use the modcharting tool.
 # NOTES:
 - We did not make the modchart tool. Original developers goes to [TheZoroForce](https://github.com/TheZoroForce240/FNF-Modcharting-Tools) and [EdwhakKB](https://github.com/EdwhakKB/FNF-Modcharting-Tools). All props go to them.
 - The modchart editor does not combine with `.lua`. Having both is fine, but the Modchart editor doesn't show the `.lua` events.
+- The instructions here may change when 1.0.0 launches.
 
 There are two ways to create a modchart. Using the modchart editor, or using pure code with `.lua` files.
 

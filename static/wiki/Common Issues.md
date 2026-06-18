@@ -8,7 +8,7 @@ Here are some known/common issues with Solar Engines. These may be out of date, 
 
 # NOTES
 - Development is slow, everyone in the team is busy with IRL, don't come after us.
-- [Char](https://vschar-official.com/) is the only person developing the Archived version of Solar Engine.
+- [Char](https://vschar-official.com/) is the only person developing the Archived version of Solar Engine. | Hi Char here, I also have like 50 million unfinished projects that I bounce between lmao.
 
 ## Compiling Issues
 ### Unknown class MP4Handler
