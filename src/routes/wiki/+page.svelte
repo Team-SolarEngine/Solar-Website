@@ -24,6 +24,24 @@
     let wikiContent = $state(''); 
     let wikiList = $state([]);
 
+    const loaded = get_loaded()
+
+    function get_loaded()
+    {
+        let loaded = 'Welcome to the Solar Engine Wiki';
+
+        if (window.innerWidth <= 768)
+        {
+            loaded += 'Click/Tap on the articles above to view them!';   
+        }
+        else
+        {
+            loaded += 'Click/Tap on the articles to the left to view them!';
+        }
+
+        return loaded;
+    }
+
     async function getWikiList() {
         try {
             const response = await fetch("/api/getmarkdown?type=wiki&act=getMarkdowns");
@@ -93,7 +111,7 @@
                     {@html marked.parse(wikiContent)}
                 </article>
             {:else}
-                <p>Welcome to the Solar Engine Wiki! You can find entries on the left.</p>
+                <p>{loaded}</p>
             {/if}
         </div>
     </div>
