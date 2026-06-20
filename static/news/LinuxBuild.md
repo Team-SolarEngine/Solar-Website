@@ -8,4 +8,4 @@ Did you know we added a Linux build?
 
 Now you do!
 
-You can play it on Linux now.
+You can play it on Linux now. 0.6.1 has a Linux build.
