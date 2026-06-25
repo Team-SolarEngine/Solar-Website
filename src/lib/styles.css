@@ -4,7 +4,9 @@
 }
 
 :root{
-    --background: #723C99;
+    --primary: #A226FF;
+    --secondary: #8408eb;
+
     --border: rgba(255, 255, 255, 0.25);
 }
 

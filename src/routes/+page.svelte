@@ -125,8 +125,8 @@
                             </div>
     
                             <div class="repoDetails">
-                                <span>{repo.stars} stars</span> -
-                                <span>{repo.forks} forks</span>
+                                <span class="{repo.stars === 0 ? 'zeroStars' : ''}">{repo.stars} stars</span>
+                                <span class="{repo.stars === 0 ? 'zeroStars' : ''}">{repo.forks} forks</span>
                             </div>
                         </a>
                     {/each}
@@ -215,17 +215,51 @@
                 align-items: center;
                 justify-content: center;
                 gap: 10px;
+                align-items: stretch;
 
                 .repoCard {
+                    --background-rc: rgba(0, 0, 0, 0.25);
+                    --border-rc: rgba(0, 0, 0, 0.5);
+                    --red-rc: rgba(225, 0, 0, 0);
+                    
                     text-decoration: none;
                     color: white;
-                    background-color: rgba(0, 0, 0, 0.1);
+                    background-color: var(--background-rc);
                     padding: 10px 15px;
                     border-radius: 10px;
-                    transition: background-color 0.1s ease;
+                    transition: border 0.1s ease;
+                    border: 2px solid var(--border-rc);
+                    width: 300px !important;
+                    @media screen and (max-width: 768px) { width: 100% !important; }
+                    display: flex;
+                    flex-direction: column;
+                    height: auto;
+                    align-self: auto;
 
                     &:hover {
-                        background-color: rgba(0, 0, 0, 0.3);
+                        --border-rc: var(--secondary);
+                        --red-rc: rgba(225, 0, 0, 1);
+                        
+                        border: 2px solid var(--border-rc);
+                    }
+
+                    .repoInfo {
+                        flex: 1;
+                    }
+
+                    .repoDetails {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+
+                        span {
+                            background-color: var(--background-rc);
+                            border: 2px solid var(--border-rc);
+                            padding: 5px 10px;
+                            border-radius: 5px;
+                            transition: border 0.1s ease;
+                        } span:last-child { transition-delay: 0.1s; }
+                        .zeroStars { border-color: var(--red-rc); }
                     }
                 }
             }
