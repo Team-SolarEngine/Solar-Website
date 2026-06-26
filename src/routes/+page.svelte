@@ -72,8 +72,6 @@
                     <img src="/assets/arrowDOWN0.png" alt="Arrow Down" width="100" height="100"/>
                     <section>
                         <p>Solar Engine is a FNF Engine forked from the base game.</p>
-
-
                         <p>0.6 is the last major version of the Psych Fork, 1.0+ is forked from 0.2.8</p>
                     </section>
                 </div>

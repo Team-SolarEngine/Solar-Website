@@ -1,13 +1,20 @@
 <script lang="js">
   let { page = '' } = $props();
+
+  const pages = [
+    { "name": "Home", "url": "/"},
+    { "name": "Wiki", "url": "/wiki"},
+    { "name": "News", "url": "/news"},
+    { "name": "Shares", "url": "/shares"},
+  ]
 </script>
 
 <main class="topbar">
-    <div class="buttons">
-        <a href="/" class:active={page === 'home'}>Home</a>
-        <a href="/wiki" class:active={page === 'wiki'}>Wiki</a>
-        <a href="/news" class:active={page === 'news'}>News</a>
-    </div>
+  <div class="buttons">
+    {#each pages as _page}
+      <a href={_page.url} class:active={page === _page.name.toLowerCase()}>{_page.name}</a>
+    {/each}
+  </div>
 </main>
 
 <style>
