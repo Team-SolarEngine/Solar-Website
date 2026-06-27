@@ -1,6 +1,6 @@
 **Date**: 19th June 2026 <br/>
 **Creator**: CharGoldenYT <br/>
-**Raw File**: https://github.com/Team-SolarEngine/Solar-Website/blob/main/static/news/LinuxBuild.md
+**Raw File**: https://github.com/Team-SolarEngine/Solar-Website/blob/main/static/news/Linux%20Build.md
 
 ---
 
