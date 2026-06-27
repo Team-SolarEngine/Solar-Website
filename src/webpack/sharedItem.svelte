@@ -143,6 +143,7 @@
                 --size: 75px;
                 width: var(--size);
                 height: var(--size);
+                border-radius: 5px;
             }
 
             .desc {

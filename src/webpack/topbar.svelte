@@ -29,7 +29,7 @@
         .buttons {
             display: flex;
             gap: 0.5rem;
-            overflow-x: auto;
+            @media screen and (max-width: 768px) { overflow-x: auto; }
 
             a {
                 color: white;
