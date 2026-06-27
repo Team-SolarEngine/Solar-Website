@@ -28,7 +28,7 @@
     </div>
 
     <div class="tags">
-        <span class="pill {config?.canMessWithComputer}">
+        <span class="pill {config?.canMessWithComputer} cmwc">
             {#if config?.canMessWithComputer == "yes" }
                 WILL MESS COMPUTER
             {:else}
@@ -36,7 +36,7 @@
             {/if}
         </span>
 
-        <span class="pill {config?.isOpenSource}">
+        <span class="pill {config?.isOpenSource} os">
             {#if config?.isOpenSource == "yes" }
                 OPEN SOURCE
             {:else}
@@ -118,6 +118,9 @@
 
             &.yes { background-color: rgba(0, 180, 0, 1); border: 2px solid rgba(0, 210, 0, 1) }
             &.no { background-color: rgba(180, 0, 0, 1); border: 2px solid rgba(210, 0, 0, 1)}
+
+            &.cmwc.no { background-color: rgba(0, 180, 0, 1); border: 2px solid rgba(0, 210, 0, 1) }
+            &.cmwc.yes { background-color: rgba(180, 180, 0, 1); border: 2px solid rgba(210, 210, 0, 1) }
         }
     }
 
