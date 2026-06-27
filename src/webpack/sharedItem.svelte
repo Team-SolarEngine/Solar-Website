@@ -53,6 +53,10 @@
             {#if config?.githubURL}
                 <a href={config?.githubURL}>GitHub Link</a>
             {/if}
+
+            {#if config?.downloadURL}
+                <a href={config?.downloadURL}>Download Link</a>
+            {/if}
         </div>
     </div>
 </div>
@@ -146,12 +150,15 @@
                 padding: 0 10px;
                 width: 95%;
                 border-radius: 5px;
+
+                :global(a) { color: aqua; }
             }
 
             .links {
                 width: 100%;
                 display: flex;
                 justify-content: end;
+                gap: 10px;
 
                 a {
                     color: aqua;
