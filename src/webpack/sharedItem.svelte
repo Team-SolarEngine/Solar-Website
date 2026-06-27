@@ -17,12 +17,32 @@
 </script>
 
 <div class="sharedItem" onclick={togglePopover}>
-    <img src={logo} alt={config?.title} class="avatar"/>
+    <div class="important">
+        <img src={logo} alt={config?.title} class="avatar"/>
 
-    <div class="desc">
-        <span class="title">{config?.title}</span>
-        <span>{config?.description}</span>
-        <a href={config?.madeByURL} class="madeBy" target="_blank">{config?.madeBy}</a>
+        <div class="desc">
+            <span class="title">{config?.title}</span>
+            <span>{config?.description}</span>
+            <a href={config?.madeByURL} class="madeBy" target="_blank">{config?.madeBy}</a>
+        </div>
+    </div>
+
+    <div class="tags">
+        <span class="pill {config?.canMessWithComputer}">
+            {#if config?.canMessWithComputer == "yes" }
+                WILL MESS COMPUTER
+            {:else}
+                CANNOT MESS COMPUTER
+            {/if}
+        </span>
+
+        <span class="pill {config?.isOpenSource}">
+            {#if config?.isOpenSource == "yes" }
+                OPEN SOURCE
+            {:else}
+                NOT OPEN SOURCE
+            {/if}
+        </span>
     </div>
 </div>
 
@@ -45,18 +65,38 @@
             {@html marked(readme)}
         </div>
 
-        <div class="links">
-            {#if config?.externalURL}
-                <a href={config?.externalURL}>Extenal Link</a>
-            {/if}
-
-            {#if config?.githubURL}
-                <a href={config?.githubURL}>GitHub Link</a>
-            {/if}
-
-            {#if config?.downloadURL}
-                <a href={config?.downloadURL}>Download Link</a>
-            {/if}
+        <div class="extraBottom">
+            <div class="tags">
+                <span class="pill {config?.canMessWithComputer}">
+                    {#if config?.canMessWithComputer == "yes" }
+                        WILL MESS COMPUTER
+                    {:else}
+                        CANNOT MESS COMPUTER
+                    {/if}
+                </span>
+        
+                <span class="pill {config?.isOpenSource}">
+                    {#if config?.isOpenSource == "yes" }
+                        OPEN SOURCE
+                    {:else}
+                        NOT OPEN SOURCE
+                    {/if}
+                </span>
+            </div>
+            
+            <div class="links">
+                {#if config?.externalURL}
+                    <a href={config?.externalURL}>Extenal Link</a>
+                {/if}
+    
+                {#if config?.githubURL}
+                    <a href={config?.githubURL}>GitHub Link</a>
+                {/if}
+    
+                {#if config?.downloadURL}
+                    <a href={config?.downloadURL}>Download Link</a>
+                {/if}
+            </div>
         </div>
     </div>
 </div>
@@ -65,29 +105,50 @@
 <style>
     .title { font-size: 1.5rem; }
     .madeBy { font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); width: fit-content }
-    
-    .sharedItem {
+
+    .tags {
         display: flex;
         gap: 5px;
+
+        .pill {
+            background-color: rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 5px;
+
+            &.yes { background-color: rgba(0, 180, 0, 1); border: 2px solid rgba(0, 210, 0, 1) }
+            &.no { background-color: rgba(180, 0, 0, 1); border: 2px solid rgba(210, 0, 0, 1)}
+        }
+    }
+
+    .sharedItem {
         background-color: rgba(0, 0, 0, 0.25);
         border: 2px solid rgba(0, 0, 0, 0.5);
         padding: 15px 20px;
         width: 450px !important;
         border-radius: 10px;
-        transition: border 100ms ease;
-        @media screen and (max-width: 768px) { width: 100% !important; }
 
-        &:hover { border: 2px solid var(--primary); }
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        &:hover { border: 2px solid var(--primary); cursor: pointer; }
 
-        .avatar {
-            --size: 75px;
-            width: var(--size);
-            height: var(--size);
-        }
-        
-        .desc {
+        .important {
             display: flex;
-            flex-direction: column;
+            gap: 5px;
+            transition: border 100ms ease;
+            @media screen and (max-width: 768px) { width: 100% !important; }
+
+            .avatar {
+                --size: 75px;
+                width: var(--size);
+                height: var(--size);
+            }
+
+            .desc {
+                display: flex;
+                flex-direction: column;
+            }
         }
     }
 
@@ -154,14 +215,23 @@
                 :global(a) { color: aqua; }
             }
 
-            .links {
-                width: 100%;
+            .extraBottom {
                 display: flex;
-                justify-content: end;
-                gap: 10px;
+                @media screen and (max-width: 768px) { flex-direction: column; }
+                width: 100%;
+                align-items: center;
 
-                a {
-                    color: aqua;
+                .tags { flex: 1; }
+
+                .links {
+                    display: flex;
+                    justify-content: end;
+                    gap: 10px;
+
+                    a {
+                        color: aqua;
+                        text-align: center;
+                    }
                 }
             }
         }
