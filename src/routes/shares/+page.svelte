@@ -1,10 +1,15 @@
 <script lang="js">
     import { onMount } from 'svelte';
     import Topbar from '../../webpack/topbar.svelte';
+    import sharedItem from '../../webpack/sharedItem.svelte'
+    import SharedItem from '../../webpack/sharedItem.svelte';
     const page = 'shares'
 
     const urlToFeatured = $state("https://raw.githubusercontent.com/Team-SolarEngine/test-repo/refs/heads/main/featured-repos.txt")
     let githubLinks = $state([]);
+
+    let sharedLoading = $state(true)
+    let sharedError = $state(false)
     
     async function getShareds() {
       try {
@@ -26,7 +31,10 @@
         return results
       } catch(e) {
         console.error(e)
+        sharedError = true
         return []
+      } finally {
+        sharedLoading = false
       }
     }
 
@@ -47,17 +55,17 @@
         <div class="sharedGroup">
             {#if githubLinks}
                 {#each githubLinks as ghl}
-                    <div class="sharedItem">
-                        <img src={ghl.logo} alt={ghl.config?.title} class="avatar"/>
-
-                        <div class="desc">
-                            <span class="title">{ghl.config?.title}</span>
-                            <span>{ghl.config?.description}</span>
-                        </div>
-                    </div>
+                    <SharedItem
+                        logo={ghl.logo}
+                        banner={ghl.banner}
+                        readme={ghl.readme}
+                        config={ghl.config}
+                    />
                 {/each}
-            {:else}
-                <span>Failed to get repositories...</span>
+            {:else if sharedError}
+                <span>Failed to get mods...</span>
+            {:else if sharedLoading}
+                <span>Loading the mods...</span>
             {/if}
         </div>
     </div>
@@ -82,38 +90,10 @@
 
         .sharedGroup {
             display: flex;
-            flex-direction: column;
             align-items: center;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 5px;
-
-            .sharedItem {
-                display: flex;
-                gap: 5px;
-                background-color: rgba(0, 0, 0, 0.25);
-                border: 2px solid rgba(0, 0, 0, 0.5);
-                padding: 15px 20px;
-                width: 450px !important;
-                border-radius: 10px;
-                transition: border 100ms ease;
-
-                &:hover { border: 2px solid var(--primary); }
-
-                .avatar {
-                    --size: 75px;
-                    width: var(--size);
-                    height: var(--size);
-                }
-                
-                .desc {
-                    display: flex;
-                    flex-direction: column;
-
-                    .title {
-                        font-size: 1.5rem;
-                    }
-                }
-            }
         }
     }
 </style>
