@@ -36,7 +36,7 @@
         <div class="desc">
             <div class="info">
                 <span class="title">{config?.title}</span>
-                <span style="width: 500px;">{config?.description}</span>
+                <span class="desc">{config?.description}</span>
                 <a href={config?.madeByURL} class="madeBy" target="_blank">{config?.madeBy}</a>
             </div>
         </div>
@@ -71,6 +71,7 @@
         width: 450px !important;
         border-radius: 10px;
         transition: border 100ms ease;
+        @media screen and (max-width: 768px) { width: 100% !important; }
 
         &:hover { border: 2px solid var(--primary); }
 
@@ -102,6 +103,7 @@
             border-radius: 10px;
             border: 2px solid var(--primary);
             max-width: 750px;
+            @media screen and (max-width: 768px) { max-width: 100% !important; }
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -118,6 +120,7 @@
             .banner {
                 width: 650px;
                 border-radius: 15px;
+                @media screen and (max-width: 768px) { width: 100% !important; }
             }
 
             .desc {
@@ -128,6 +131,11 @@
                 .info {
                     display: flex;
                     flex-direction: column;
+
+                    .desc {
+                        width: 500px !important;
+                        @media screen and (max-width: 768px) { width: 100% !important; }
+                    }
                 }
             }
 

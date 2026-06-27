@@ -29,7 +29,8 @@
         .buttons {
             display: flex;
             gap: 0.5rem;
-            
+            overflow-x: auto;
+
             a {
                 color: white;
                 text-decoration: none;
