@@ -4,7 +4,7 @@
 
 ## The official website for the Solar Engine | Built with Svelte.
 
-The site is still under construction but it will be the host for the wiki as well as Solar Engine updates! Suggest things with the [Issues page](https://github.com/Team-SolarEngine/Solar-Website/issues)
+The site is still under construction but it will be the host for the wiki as well as Solar Engine updates! Suggest things with the [Issues page](https://solarengine.net)
  or alternatively you can fork the website and make a pull request!
 
 # TODOS:
