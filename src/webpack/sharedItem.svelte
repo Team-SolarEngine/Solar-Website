@@ -29,7 +29,7 @@
 
     <div class="tags">
         <span class="pill {config?.canMessWithComputer} cmwc">
-            {#if config?.canMessWithComputer == "yes" }
+            {#if config?.canMessWithComputer == "yes" || config?.canMessWithComputer == "y" }
                 WILL MESS COMPUTER
             {:else}
                 CANNOT MESS COMPUTER
@@ -37,7 +37,7 @@
         </span>
 
         <span class="pill {config?.isOpenSource} os">
-            {#if config?.isOpenSource == "yes" }
+            {#if config?.isOpenSource == "yes" || config?.isOpenSource == "y" }
                 OPEN SOURCE
             {:else}
                 NOT OPEN SOURCE
