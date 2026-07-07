@@ -4,8 +4,6 @@
     const page = 'home';
 
     let githubRepos = $state([]);
-    let githubRepos_loading = $state(true);
-    let githubRepos_error = $state(false);
     
     let engineVersionBuild = $state('null');
     const engineVersionURL = 'https://raw.githubusercontent.com/Team-SolarEngine/Solar-Engine-Archive/main/gitVersion.txt';
@@ -28,15 +26,9 @@
     }
 
     async function fetchGithubRepos() {
-      try {
-        const response = await fetch("/api/github?type=repos")
-        if (response.ok) { githubRepos = (await response.json()).data; }
-        else { console.error('Failed to fetch GitHub repos. Status:', response.status); githubRepos_error = true; }
-        githubRepos_loading = false;
-      } catch (error) {
-        console.error('Exception while fetching GitHub repos:', error);
-        githubRepos_error = true;
-      }
+      const response = await fetch("/api/github?type=repos")
+      if (response.ok) { githubRepos = (await response.json()).data; }
+      else { console.error('Failed to fetch GitHub repos. Status:', response.status); githubRepos_error = true; }
     }
 
     let downloadButtons = $derived([
@@ -55,8 +47,9 @@
     
     onMount(() => {
         fetchEngineVersion();
-        fetchGithubRepos();
     });
+
+    let promise = fetchGithubRepos();
 </script>
 
 <main>
@@ -109,7 +102,9 @@
         <div class="background githubRepos">
             <h1>GitHub Repositories</h1>
             <div class="repoGroup">
-                {#if githubRepos.length > 0}
+                {#await promise}
+                    <span>Loading repositories...</span>
+                {:then _} 
                     {#each githubRepos as repo}
                         <a class="repoCard" href={repo.url}>
                             <div class="repoInfo">
@@ -117,22 +112,20 @@
                                 
                                 {#if repo.description}
                                     <p>{repo.description}</p>
-                                {:else}
+                                    {:else}
                                     <p>No description available.</p>
-                                {/if}
+                                    {/if}
                             </div>
-    
+                            
                             <div class="repoDetails">
                                 <span class="{repo.stars === 0 ? 'zeroStars' : ''}">{repo.stars} stars</span>
                                 <span class="{repo.stars === 0 ? 'zeroStars' : ''}">{repo.forks} forks</span>
                             </div>
                         </a>
-                    {/each}
-                {:else if githubRepos_error}
-                    <p>Failed to fetch repositories. Check the console for more details.</p>
-                {:else if githubRepos_loading}
-                    <p>Fetching the repositories...</p>
-                {/if}
+                        {/each}
+                {:catch error}
+                    <span>Failed to fetch repositories; {error.message}</span>
+                {/await}
             </div>
         </div>
     </div>

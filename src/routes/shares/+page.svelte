@@ -11,20 +11,13 @@
     let sharedError = $state(false)
     
     async function getShareds() {
-      try {
-        const response = await fetch(urlToFeatured)
-        const data = await response.text()
-        return data.trim().split("\n").filter(repo => repo.trim() !== "")
-      } catch(e) {
-        console.error(e)
-        sharedError = true
-      } finally {
-        sharedLoading = false
-      }
+      const response = await fetch(urlToFeatured)
+      const data = await response.text()
+      return data.trim().split("\n").filter(repo => repo.trim() !== "")
     }
 
-    onMount(async () => {
-       githubLinks = await getShareds()
+    onMount(() => {
+       githubLinks = getShareds()
     })
 </script>
 
@@ -38,17 +31,15 @@
         </div>
 
         <div class="sharedGroup">
-            {#if githubLinks.length > 0}
-                {#each githubLinks as ghl}
+            {#await githubLinks}
+                <span>Loading the mods...</span>
+            {:then data} 
+                {#each data as ghl}
                     <SharedItem repoLines={ghl} />
                 {/each}
-            {:else if sharedError}
-                <span>Failed to get mods...</span>
-            {:else if sharedLoading}
-                <span>Loading the mods...</span>
-            {:else}
-                <span>No mods...</span>
-            {/if}
+            {:catch error}
+                <span>Something went wrong..! ({error.message})</span>
+            {/await}
         </div>
     </div>
 </main>

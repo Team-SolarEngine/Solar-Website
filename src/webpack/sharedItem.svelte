@@ -1,46 +1,31 @@
 <!-- here goes the card and the popup thingy i guess -->
 <script>
     import { marked } from "marked";
-    import { onMount } from "svelte";
-    
+
     let { repoLines = '' } = $props();
 
-    let config = $state(null);
-    let logo = $state('');
-    let banner = $state('');
-    let readme = $state('');
-    let changelog = $state('');
+    let data = $state(null);
     let pills = $state([]);
 
     let activeTab = $state('readme')
-    let displayMarkdown = $derived(activeTab === 'readme' ? readme : changelog);
+    let displayMarkdown = $derived(activeTab === 'readme' ? data?.readme : data?.changelog);
     
     let doPopOver = $state(false)
     function togglePopover() { doPopOver = !doPopOver }
 
-    async function getInfo() {
-      try {
-        if (!repoLines) return;
-        const res = await fetch(`/api/shared?repo=${repoLines}`)
-        const json = await res.json()
-        
-        if (json && json.config) {
-          config = json.config;
-          logo = json.logo;
-          banner = json.banner;
-          readme = json.readme;
-          changelog = json.changelog;
-        }
-      } catch(e) {
-        console.error(e)
-      }
+    async function load() {
+      if (!repoLines) throw new Error("No repo specified");
+      const res = await fetch(`/api/shared?repo=${repoLines}`);
+      if (!res.ok) throw new Error("Failed to fetch");
+      const json = await res.json();
+      if (!json?.config) throw new Error("Invalid response");
+      data = json;
+      buildPills(json.config);
     }
 
-    function getPills() {
-      if (!config) return;
-
+    function buildPills(config) {
       const isTruthy = (val) => ["yes", "y", "1"].includes(val);
-      
+
       const pillRules = {
         canMessWithComputer: {
           true:  { text: "WILL MESS COMPUTER",  border: "rgba(210, 210, 0, 1)", bg: "rgba(180, 180, 0, 1)" },
@@ -59,93 +44,96 @@
       }
     }
 
-    onMount(async () => {
-      await getInfo()
-      getPills()
-    })
+    let promise = load();
 </script>
 
-<div class="sharedItem" onclick={togglePopover}>
-    <div class="important">
-        <img src={logo} alt={config?.title} class="avatar"/>
+{#await promise}
+    <div class="sharedItem"><span style="display: flex; justify-content: center;">Loading...</span></div>
+{:then _}
+    <div class="sharedItem" onclick={togglePopover}>
+        <div class="important">
+            <img src={data.logo} alt={data.config?.title} class="avatar"/>
 
-        <div class="desc">
-            <span class="title">{config?.title}</span>
-            <span>{config?.description}</span>
-            <a href={config?.madeByURL} class="madeBy" target="_blank">{config?.madeBy}</a>
+            <div class="desc">
+                <span class="title">{data.config?.title}</span>
+                <span>{data.config?.description}</span>
+                <a href={data.config?.madeByURL} class="madeBy" target="_blank">{data.config?.madeBy}</a>
+            </div>
+        </div>
+
+        <div class="tags">
+            {#each pills as pill}
+                <span style="--si-border: {pill.border}; --si-bg: {pill.bg};" class="pill">
+                    {pill.text}
+                </span>
+            {/each}
         </div>
     </div>
 
-    <div class="tags">
-        {#each pills as pill}
-            <span style="--si-border: {pill.border}; --si-bg: {pill.bg};" class="pill">
-                {pill.text}
-            </span>
-        {/each}
-    </div>
-</div>
+    {#if doPopOver}
+    <div class="popoverModule">
+        <div class="popoverUI">
+            <span class="closeButton" onclick={togglePopover}>X</span>
 
-{#if doPopOver}
-<div class="popoverModule">
-    <div class="popoverUI">
-        <span class="closeButton" onclick={togglePopover}>X</span>
-        
-        <img src={banner} alt={config?.title} class="banner"/>
+            <img src={data.banner} alt={data.config?.title} class="banner"/>
 
-        <div class="desc">
-            <div class="info">
-                <span class="title">{config?.title}</span>
-                <span class="desc">{config?.description}</span>
-                <a href={config?.madeByURL} class="madeBy" target="_blank">{config?.madeBy}</a>
+            <div class="desc">
+                <div class="info">
+                    <span class="title">{data.config?.title}</span>
+                    <span class="desc">{data.config?.description}</span>
+                    <a href={data.config?.madeByURL} class="madeBy" target="_blank">{data.config?.madeBy}</a>
+                </div>
             </div>
-        </div>
 
-        <div class="markdown">
-            <div class="tabs">
-              <button 
-                class:active={activeTab === 'readme'} 
-                onclick={() => activeTab = 'readme'}
-              >
-                README
-              </button>
-              
-              <button 
-                class:active={activeTab === 'changelog'} 
-                onclick={() => activeTab = 'changelog'}
-              >
-                Changelog
-              </button>
-            </div>
-            
-            {@html marked(displayMarkdown)}
-        </div>
+            <div class="markdown">
+                <div class="tabs">
+                  <button
+                    class:active={activeTab === 'readme'}
+                    onclick={() => activeTab = 'readme'}
+                  >
+                    README
+                  </button>
 
-        <div class="extraBottom">
-            <div class="tags">
-                {#each pills as pill}
-                    <span style="--si-border: {pill.border}; --si-bg: {pill.bg};" class="pill">
-                        {pill.text}
-                    </span>
-                {/each}
+                  <button
+                    class:active={activeTab === 'changelog'}
+                    onclick={() => activeTab = 'changelog'}
+                  >
+                    Changelog
+                  </button>
+                </div>
+
+                {@html marked(displayMarkdown)}
             </div>
-            
-            <div class="links">
-                {#if config?.externalURL}
-                    <a href={config?.externalURL}>Extenal Link</a>
-                {/if}
-    
-                {#if config?.githubURL}
-                    <a href={config?.githubURL}>GitHub Link</a>
-                {/if}
-    
-                {#if config?.downloadURL}
-                    <a href={config?.downloadURL}>Download Link</a>
-                {/if}
+
+            <div class="extraBottom">
+                <div class="tags">
+                    {#each pills as pill}
+                        <span style="--si-border: {pill.border}; --si-bg: {pill.bg};" class="pill">
+                            {pill.text}
+                        </span>
+                    {/each}
+                </div>
+
+                <div class="links">
+                    {#if data.config?.externalURL}
+                        <a href={data.config?.externalURL}>Extenal Link</a>
+                    {/if}
+
+                    {#if data.config?.githubURL}
+                        <a href={data.config?.githubURL}>GitHub Link</a>
+                    {/if}
+
+                    {#if data.config?.downloadURL}
+                        <a href={data.config?.downloadURL}>Download Link</a>
+                    {/if}
+                </div>
             </div>
         </div>
     </div>
-</div>
-{/if}
+    {/if}
+{:catch e}
+    <div class="sharedItem"><span style="color: red; display: flex; justify-content: center;">Failed to load: {e.message}</span></div>
+{/await}
 
 <style>
     .title { font-size: 1.5rem; }
