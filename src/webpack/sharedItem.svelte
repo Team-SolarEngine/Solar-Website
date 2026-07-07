@@ -206,7 +206,7 @@
             padding: 15px;
             border-radius: 10px;
             border: 2px solid var(--primary);
-            max-width: 750px;
+            width: 800px !important;
             @media screen and (max-width: 768px) { max-width: 100% !important; }
             display: flex;
             flex-direction: column;
@@ -222,9 +222,8 @@
             }
 
             .banner {
-                width: 650px;
+                width: 100%;
                 border-radius: 15px;
-                @media screen and (max-width: 768px) { width: 100% !important; }
             }
 
             .desc {
@@ -245,7 +244,7 @@
 
             .markdown {
                 background-color: rgba(0, 0, 0, 0.25);
-                max-height: 200px;
+                max-height: 400px;
                 overflow-y: auto;
                 padding: 0 10px;
                 width: 95%;
@@ -282,6 +281,7 @@
                 @media screen and (max-width: 768px) { flex-direction: column; }
                 width: 100%;
                 align-items: center;
+                gap: 10px;
 
                 .tags { flex: 1; }
 
