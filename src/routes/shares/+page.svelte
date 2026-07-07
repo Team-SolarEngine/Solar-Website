@@ -1,7 +1,6 @@
 <script lang="js">
     import { onMount } from 'svelte';
     import Topbar from '../../webpack/topbar.svelte';
-    import sharedItem from '../../webpack/sharedItem.svelte'
     import SharedItem from '../../webpack/sharedItem.svelte';
     const page = 'shares'
 
@@ -15,24 +14,10 @@
       try {
         const response = await fetch(urlToFeatured)
         const data = await response.text()
-        const repoLines = data.trim().split("\n")
-
-        const results = []
-        for (const repo of repoLines) {
-          if (!repo) continue
-          const res = await fetch(`/api/shared?repo=${repo}`)
-          const json = await res.json()
-          
-          if (json && json.config) {
-            results.push(json)
-          }
-        }
-
-        return results
+        return data.trim().split("\n").filter(repo => repo.trim() !== "")
       } catch(e) {
         console.error(e)
         sharedError = true
-        return []
       } finally {
         sharedLoading = false
       }
@@ -53,19 +38,16 @@
         </div>
 
         <div class="sharedGroup">
-            {#if githubLinks}
+            {#if githubLinks.length > 0}
                 {#each githubLinks as ghl}
-                    <SharedItem
-                        logo={ghl.logo}
-                        banner={ghl.banner}
-                        readme={ghl.readme}
-                        config={ghl.config}
-                    />
+                    <SharedItem repoLines={ghl} />
                 {/each}
             {:else if sharedError}
                 <span>Failed to get mods...</span>
             {:else if sharedLoading}
                 <span>Loading the mods...</span>
+            {:else}
+                <span>No mods...</span>
             {/if}
         </div>
     </div>

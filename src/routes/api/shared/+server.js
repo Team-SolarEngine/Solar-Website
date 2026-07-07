@@ -31,8 +31,9 @@ async function fetchGithub(repo) {
     const logo = await getFileData(repo, "logo.png", "src")
     const config = await getFileData(repo, "config.json", "json")
     const readme = await getFileData(repo, "readme.md", "text")
+    const changelog = await getFileData(repo, "changelog.md", "text")
     
-    return { banner, logo, config, readme }
+    return { banner, logo, config, readme, changelog }
   } else {
     return "One of the file doesn't exist in the directory!"
   }

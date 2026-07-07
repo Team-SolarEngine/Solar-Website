@@ -3,22 +3,42 @@
     import { marked } from "marked";
     import { onMount } from "svelte";
     
-    let {
-      logo = '',
-      banner = '',
-      readme = '',
-      config = {}
-    } = $props();
+    let { repoLines = '' } = $props();
 
+    let config = $state(null);
+    let logo = $state('');
+    let banner = $state('');
+    let readme = $state('');
+    let changelog = $state('');
     let pills = $state([]);
+
+    let activeTab = $state('readme')
+    let displayMarkdown = $derived(activeTab === 'readme' ? readme : changelog);
     
     let doPopOver = $state(false)
-    function togglePopover() {
-      doPopOver = !doPopOver
-      console.log(doPopOver)
+    function togglePopover() { doPopOver = !doPopOver }
+
+    async function getInfo() {
+      try {
+        if (!repoLines) return;
+        const res = await fetch(`/api/shared?repo=${repoLines}`)
+        const json = await res.json()
+        
+        if (json && json.config) {
+          config = json.config;
+          logo = json.logo;
+          banner = json.banner;
+          readme = json.readme;
+          changelog = json.changelog;
+        }
+      } catch(e) {
+        console.error(e)
+      }
     }
 
     function getPills() {
+      if (!config) return;
+
       const isTruthy = (val) => ["yes", "y", "1"].includes(val);
       
       const pillRules = {
@@ -39,7 +59,8 @@
       }
     }
 
-    onMount(() => {
+    onMount(async () => {
+      await getInfo()
       getPills()
     })
 </script>
@@ -80,7 +101,23 @@
         </div>
 
         <div class="markdown">
-            {@html marked(readme)}
+            <div class="tabs">
+              <button 
+                class:active={activeTab === 'readme'} 
+                onclick={() => activeTab = 'readme'}
+              >
+                README
+              </button>
+              
+              <button 
+                class:active={activeTab === 'changelog'} 
+                onclick={() => activeTab = 'changelog'}
+              >
+                Changelog
+              </button>
+            </div>
+            
+            {@html marked(displayMarkdown)}
         </div>
 
         <div class="extraBottom">
