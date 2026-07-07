@@ -42,6 +42,12 @@
         const pillData = isTrue ? states.true : states.false;
         pills.push(pillData);
       }
+
+      if (config.type) {
+        pills.push({ "text": config.type, "border": "rgba(138, 0, 225, 1)", "bg": "rgba(168, 0, 255, 1)"})
+      } else {
+        pills.push({ "text": "Other...", "border": "rgba(138, 0, 225, 1)", "bg": "rgba(168, 0, 255, 1)"})
+      }
     }
 
     let promise = load();
@@ -86,21 +92,23 @@
             </div>
 
             <div class="markdown">
-                <div class="tabs">
-                  <button
-                    class:active={activeTab === 'readme'}
-                    onclick={() => activeTab = 'readme'}
-                  >
-                    README
-                  </button>
-
-                  <button
-                    class:active={activeTab === 'changelog'}
-                    onclick={() => activeTab = 'changelog'}
-                  >
-                    Changelog
-                  </button>
-                </div>
+                {#if data.changelog != "Couldn't fetch changelog.md!"}
+                    <div class="tabs">
+                      <button
+                        class:active={activeTab === 'readme'}
+                        onclick={() => activeTab = 'readme'}
+                      >
+                        README
+                      </button>
+    
+                      <button
+                        class:active={activeTab === 'changelog'}
+                        onclick={() => activeTab = 'changelog'}
+                      >
+                        Changelogs
+                      </button>
+                    </div>
+                {/if}
 
                 {@html marked(displayMarkdown)}
             </div>
@@ -244,6 +252,29 @@
                 border-radius: 5px;
 
                 :global(a) { color: aqua; }
+
+                .tabs {
+                    display: flex;
+                    justify-content: center;
+                    gap: 5px;
+                    padding: 5px 0;
+                    overflow: none;
+
+                    button {
+                        padding: 10px;
+                        border: none;
+                        background-color: rgba(0, 0, 0, 0.3);
+                        color: white;
+                        opacity: 0.5;
+                        font-family: funkin;
+                        width: 100%;
+                        border-radius: 20px;
+                        outline: none;
+
+                        &:hover { cursor: pointer; }
+                        &.active { opacity: 1; }
+                    }
+                }
             }
 
             .extraBottom {
