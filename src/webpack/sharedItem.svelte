@@ -1,19 +1,47 @@
 <!-- here goes the card and the popup thingy i guess -->
 <script>
     import { marked } from "marked";
+    import { onMount } from "svelte";
     
     let {
       logo = '',
       banner = '',
       readme = '',
-      config = []
+      config = {}
     } = $props();
 
+    let pills = $state([]);
+    
     let doPopOver = $state(false)
     function togglePopover() {
       doPopOver = !doPopOver
       console.log(doPopOver)
     }
+
+    function getPills() {
+      const isTruthy = (val) => ["yes", "y", "1"].includes(val);
+      
+      const pillRules = {
+        canMessWithComputer: {
+          true:  { text: "WILL MESS COMPUTER",  border: "rgba(210, 210, 0, 1)", bg: "rgba(180, 180, 0, 1)" },
+          false: { text: "WON'T MESS COMPUTER", border: "rgba(0, 210, 0, 1)",   bg: "rgba(0, 180, 0, 1)" }
+        },
+        isOpenSource: {
+          true:  { text: "OPEN SOURCE",         border: "rgba(0, 210, 0, 1)",   bg: "rgba(0, 180, 0, 1)" },
+          false: { text: "NOT OPEN SOURCE",     border: "rgba(210, 0, 0, 1)",   bg: "rgba(180, 0, 0, 1)" }
+        }
+      };
+
+      for (const [key, states] of Object.entries(pillRules)) {
+        const isTrue = isTruthy(config[key]);
+        const pillData = isTrue ? states.true : states.false;
+        pills.push(pillData);
+      }
+    }
+
+    onMount(() => {
+      getPills()
+    })
 </script>
 
 <div class="sharedItem" onclick={togglePopover}>
@@ -28,21 +56,11 @@
     </div>
 
     <div class="tags">
-        <span class="pill {config?.canMessWithComputer} cmwc">
-            {#if config?.canMessWithComputer == "yes" || config?.canMessWithComputer == "y" || config?.canMessWithComputer == "1"}
-                WILL MESS COMPUTER
-            {:else}
-                CANNOT MESS COMPUTER
-            {/if}
-        </span>
-
-        <span class="pill {config?.isOpenSource} os">
-            {#if config?.isOpenSource == "yes" || config?.isOpenSource == "y" || config?.isOpenSource == "1"}
-                OPEN SOURCE
-            {:else}
-                NOT OPEN SOURCE
-            {/if}
-        </span>
+        {#each pills as pill}
+            <span style="--si-border: {pill.border}; --si-bg: {pill.bg};" class="pill">
+                {pill.text}
+            </span>
+        {/each}
     </div>
 </div>
 
@@ -67,21 +85,11 @@
 
         <div class="extraBottom">
             <div class="tags">
-                <span class="pill {config?.canMessWithComputer}">
-                    {#if config?.canMessWithComputer == "yes" }
-                        WILL MESS COMPUTER
-                    {:else}
-                        CANNOT MESS COMPUTER
-                    {/if}
-                </span>
-        
-                <span class="pill {config?.isOpenSource}">
-                    {#if config?.isOpenSource == "yes" }
-                        OPEN SOURCE
-                    {:else}
-                        NOT OPEN SOURCE
-                    {/if}
-                </span>
+                {#each pills as pill}
+                    <span style="--si-border: {pill.border}; --si-bg: {pill.bg};" class="pill">
+                        {pill.text}
+                    </span>
+                {/each}
             </div>
             
             <div class="links">
@@ -111,16 +119,10 @@
         gap: 5px;
 
         .pill {
-            background-color: rgba(0, 0, 0, 0.25);
-            border: 2px solid rgba(0, 0, 0, 0.5);
+            background-color: var(--si-bg);
+            border: 2px solid var(--si-border);
             padding: 5px;
             border-radius: 5px;
-
-            &.yes { background-color: rgba(0, 180, 0, 1); border: 2px solid rgba(0, 210, 0, 1) }
-            &.no { background-color: rgba(180, 0, 0, 1); border: 2px solid rgba(210, 0, 0, 1)}
-
-            &.cmwc.no { background-color: rgba(0, 180, 0, 1); border: 2px solid rgba(0, 210, 0, 1) }
-            &.cmwc.yes { background-color: rgba(180, 180, 0, 1); border: 2px solid rgba(210, 210, 0, 1) }
         }
     }
 
