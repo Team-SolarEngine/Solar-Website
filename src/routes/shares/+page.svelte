@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import Topbar from '../../webpack/topbar.svelte';
     import SharedItem from '../../webpack/sharedItem.svelte';
+    import SubmitShare from '../../webpack/submitShare.svelte';
     const page = 'shares'
 
     const urlToFeatured = $state("https://raw.githubusercontent.com/Team-SolarEngine/test-repo/refs/heads/main/featured-repos.txt")
@@ -28,6 +29,7 @@
         <div class="header">
             <span class="bigText">Community Shared Mods/Scripts</span>
             <span>This is where you can share your mods, or scripts, to the solar engine website!</span>
+            <SubmitShare/>
         </div>
 
         <div class="sharedGroup">
