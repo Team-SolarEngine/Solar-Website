@@ -22,7 +22,6 @@
     let errorNewsFile = $state(false);
     
     let newsMarkdown = $state(''); 
-    /** @type {{ file: string, dateStr: string }[]} */
     let newsList = $state([]);
 
     async function getNews() {
