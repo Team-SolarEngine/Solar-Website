@@ -188,6 +188,10 @@
                     padding: 0;
                     border-radius: 0;
                 }
+                :global(h1, h2, h3, h4, h5, h6) {
+                    border-bottom: 1px solid rgba(255,255, 255, 0.2);
+                    padding-bottom: 0.5rem;
+                }
             }
         }
     }
