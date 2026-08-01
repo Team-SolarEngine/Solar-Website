@@ -156,6 +156,11 @@
                 :global(p) { margin-bottom: 1rem; line-height: 1.6; }
                 :global(code) { background: rgba(0, 0, 0, 0.5); border-radius: 4px; }
                 :global(a) { color: aqua; }
+
+                :global(h1, h2, h3, h4, h5, h6) {
+                    border-bottom: 1px solid rgba(255,255, 255, 0.2);
+                    padding-bottom: 0.5rem;
+                }
             }
         }
     }
