@@ -32,12 +32,14 @@
 
         if (window.innerWidth <= 768)
         {
-            loaded += 'Click/Tap on the articles above to view them!';   
+            loaded += 'Click/Tap on the articles above to view them! ';   
         }
         else
         {
-            loaded += 'Click/Tap on the articles to the left to view them!';
+            loaded += 'Click/Tap on the articles to the left to view them! ';
         }
+
+        loaded += '<br/>Just note, the example code looks to be broken, don\'t blame us!';
 
         return loaded;
     }
@@ -112,7 +114,7 @@
                     {@html marked.parse(wikiContent)}
                 </article>
             {:else}
-                <p>{loaded}</p>
+                <p>{@html loaded}</p>
             {/if}
         </div>
     </div>

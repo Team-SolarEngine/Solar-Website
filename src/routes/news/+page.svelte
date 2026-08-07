@@ -93,7 +93,7 @@
                     {@html marked.parse(newsMarkdown)}
                 </article>
             {:else}
-                <p>Select one of the few news we have.</p>
+                <p>Select one of the few news we have. <br/> Just note, the example code looks to be broken, don\'t blame us!</p>
             {/if}
         </div>
     </div>
