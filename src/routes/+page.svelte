@@ -40,7 +40,7 @@
 
     const contributors = [
       { name: 'Daveberry', url: 'https://codedave.pages.dev/', role: 'Former developer. Creator of the engine, and lead developer of the website.', avatar: 'https://codedave.pages.dev/assets/images/Daveberry%20Wave.png', circlePFP: false },
-      { name: 'VideoBot', url: 'https://video-bot.netlify.app/', role: 'Lead developer. Creator of the engine.', avatar: 'https://video-bot.netlify.app/_app/immutable/assets/VideoBot.BjIP8NLq.png', circlePFP: true },
+      { name: 'VideoBot', url: 'https://video-bot.netlify.app/', role: 'Lead developer. Creator of the engine.', avatar: 'https://video-bot.netlify.app/images/VideoBot.png', circlePFP: true },
       { name: 'BaranMuzu', url: 'https://baranmuzu.netlify.app/', role: 'Invited former developer.', avatar: 'https://baranmuzu.netlify.app/assets/images/baransleep.png', circlePFP: false },
       { name: 'Char', url: 'https://vschar-official.com/', role: 'Invited lead developer.', avatar: 'https://avatars.githubusercontent.com/u/73309364?v=4?s=400', circlePFP: false },
     ]
@@ -83,7 +83,10 @@
         </div>
         
         <div class="background meetthedevs">
-            <h1>Meet the devs!</h1>
+            <div class="title">
+                <span class="bigboi">Meet the devs!</span>
+                <span>The developers and contributors behind Solar Engine.</span>
+            </div>
             <div class="devs">
                 {#each contributors as contributor}
                     <div class="dev">
@@ -100,21 +103,29 @@
         </div>
 
         <div class="background githubRepos">
-            <h1>GitHub Repositories</h1>
+            <div class="title">
+                <span class="bigboi">GitHub Repositories</span>
+                <span>The main repositories are the ones with the higher opacity.</span>
+            </div>
             <div class="repoGroup">
                 {#await promise}
                     <span>Loading repositories...</span>
                 {:then _} 
                     {#each githubRepos as repo}
-                        <a class="repoCard" href={repo.url}>
+                        <a
+                            class="repoCard"
+                            class:mainRepos={repo.name == 'Solar-Engine-Archive' || repo.name == 'Solar-Website' || repo.name == 'solar-lanucher'}
+                            href={repo.url}
+                            target="_blank"
+                        >
                             <div class="repoInfo">
                                 <span class="bigText">{repo.name}</span>
-                                
+
                                 {#if repo.description}
                                     <p>{repo.description}</p>
-                                    {:else}
+                                {:else}
                                     <p>No description available.</p>
-                                    {/if}
+                                {/if}
                             </div>
                             
                             <div class="repoDetails">
@@ -133,6 +144,7 @@
 
 <style>
     .main {
+        margin-bottom: 20px;
         .mainContent {
             display: flex;
             flex-direction: row;
@@ -212,7 +224,7 @@
                     --background-rc: rgba(0, 0, 0, 0.25);
                     --border-rc: rgba(0, 0, 0, 0.5);
                     --red-rc: rgba(225, 0, 0, 0);
-                    
+
                     text-decoration: none;
                     color: white;
                     background-color: var(--background-rc);
@@ -226,12 +238,16 @@
                     flex-direction: column;
                     height: auto;
                     align-self: auto;
+                    rotate: 2deg;
+                    opacity: 0.5;
+                    &.mainRepos { rotate: -2deg; opacity: 1; }
 
                     &:hover {
                         --border-rc: var(--secondary);
                         --red-rc: rgba(225, 0, 0, 1);
                         
                         border: 2px solid var(--border-rc);
+                        opacity: 1;
                     }
 
                     .repoInfo {
@@ -278,6 +294,17 @@
                 flex-direction: column;
                 align-items: center;
             }
+        }
+    }
+
+    .title {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+
+        .bigboi {
+            font-size: 2rem;
         }
     }
 </style>
