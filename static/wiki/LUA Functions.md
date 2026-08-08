@@ -1,6 +1,6 @@
 **Date**: 8th August 2026 <br/>
 **Creator**: CharGoldenYT <br/>
-**Raw File**: https://github.com/Team-SolarEngine/Solar-Website/blob/main/static/wiki/LUAFuncs.md
+**Raw File**: https://github.com/Team-SolarEngine/Solar-Website/blob/main/static/wiki/LUA%20Functions.md
 
 ---
 
