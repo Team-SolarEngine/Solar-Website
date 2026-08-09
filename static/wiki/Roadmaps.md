@@ -6,14 +6,6 @@
 
 Here is where roadmaps should be put
 
-
-0.6.2 (+?) [CharGoldenYT]:
-* <s> Compile and push a Linux build (0.6.1)</s> (Thanks Dave, I'm too lazy to install linux)
-* <s> Fix an issue where pressing assigned volume buttons (+/-/0) crashes the game </s>
-* Fix an issue where enabling dark mode prevents text from being rendered correctly in dialogue boxes
-* <s> Backport 0.7.3 ClientPrefs.data </s>
-* Make a easy setup+install script Haxe based or otherwise to reduce compilation errors
-
 1.0.0 [VideobotYT, CharGoldenYT]:
 
 * Modding Support
