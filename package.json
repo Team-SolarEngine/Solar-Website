@@ -30,6 +30,7 @@
 		"@sveltejs/adapter-netlify": "^6.0.4",
 		"highlight.js": "^11.11.1",
 		"marked": "^18.0.2",
-		"marked-highlight": "^2.2.4"
+		"marked-highlight": "^2.2.4",
+		"overtype": "^2.4.0"
 	}
 }
