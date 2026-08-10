@@ -57,7 +57,7 @@
     <div class="sharedItem"><span style="display: flex; justify-content: center;">Loading...</span></div>
 {:then _}
     <div class="sharedItem" onclick={togglePopover}>
-        <div class="important">
+        <div class="important outside">
             <img src={data.logo} alt={data.config?.title} class="avatar"/>
 
             <div class="desc">
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div class="tags">
+        <div class="tags outside">
             {#each pills as pill}
                 <span style="--si-border: {pill.border}; --si-bg: {pill.bg};" class="pill">
                     {pill.text}
@@ -165,28 +165,33 @@
         padding: 15px 20px;
         width: 450px !important;
         border-radius: 10px;
+        height: auto;
 
         display: flex;
         flex-direction: column;
         gap: 10px;
         &:hover { border: 2px solid var(--primary); cursor: pointer; }
-
+        
         .important {
             display: flex;
             gap: 5px;
             transition: border 100ms ease;
             @media screen and (max-width: 768px) { width: 100% !important; }
-
+            
             .avatar {
                 --size: 75px;
                 width: var(--size);
                 height: var(--size);
                 border-radius: 5px;
             }
-
+            
             .desc {
                 display: flex;
                 flex-direction: column;
+            }
+
+            &.outside {
+                flex: 1;
             }
         }
     }

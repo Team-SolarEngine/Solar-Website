@@ -66,7 +66,7 @@
 
         .sharedGroup {
             display: flex;
-            align-items: center;
+            align-items: stretch;
             flex-wrap: wrap;
             justify-content: center;
             gap: 5px;
