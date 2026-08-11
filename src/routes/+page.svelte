@@ -44,7 +44,15 @@
       { name: 'BaranMuzu', url: 'https://baranmuzu.netlify.app/', role: 'Invited former developer.', avatar: 'https://baranmuzu.netlify.app/assets/images/baransleep.png', circlePFP: false },
       { name: 'Char', url: 'https://vschar-official.com/', role: 'Invited lead developer.', avatar: 'https://avatars.githubusercontent.com/u/73309364?v=4?s=400', circlePFP: false },
     ]
-    
+
+    const mainRepos = [
+      "Solar-Engine-Archive",
+      "Solar-Website",
+      "solar-lanucher",
+      "solar-pending-shares-py",
+      "setup-solarfiles",
+    ]
+
     onMount(() => {
         fetchEngineVersion();
     });
@@ -105,7 +113,8 @@
         <div class="background githubRepos">
             <div class="title">
                 <span class="bigboi">GitHub Repositories</span>
-                <span>The main repositories are the ones with the higher opacity.</span>
+                <span>The repositories with the higher opacity are the ones that are activly being maintained.</span>
+                <span>Check em' out. Or don't.</span>
             </div>
             <div class="repoGroup">
                 {#await promise}
@@ -114,7 +123,7 @@
                     {#each githubRepos as repo}
                         <a
                             class="repoCard"
-                            class:mainRepos={repo.name == 'Solar-Engine-Archive' || repo.name == 'Solar-Website' || repo.name == 'solar-lanucher'}
+                            class:mainRepos={mainRepos.includes(repo.name)}
                             href={repo.url}
                             target="_blank"
                         >
