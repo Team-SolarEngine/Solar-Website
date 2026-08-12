@@ -5,6 +5,8 @@
 
     async function submitShares() {
       if (!githubUrl) return message = "WHAT IS WRONG WITH YOU.\nWHY ARE YOU BLUE.";
+      if (!githubUrl.includes("https://github.com/")) return message = "INVALID GITHUB URL.\nMAKE SURE IT STARTS WITH https://github.com/";
+      // TODO: make it where the url finds another / after username and before repo name bla blab albalbalbalblablalbl
 
       try {
         const response = await fetch('https://solar-pendings.eu1.netbird.services/send_shares', {
