@@ -5,17 +5,17 @@
 
     async function submitShares() {
       try {
-        const response = await fetch('/api/shared', {
+        const response = await fetch('https://solar-pendings.eu1.netbird.services/send_shares', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            send: githubUrl
+            url: githubUrl
           })
         })
 
-        if (!response.ok) { message = `Something went wrong.` }
+        if (!response.ok) { message = `Something went wrong. Either the server has died, or something else went wrong... Please contact the developers!` }
         else { message = `Something went right! Your share is now pending...` }
       } catch(e) {
         message = e.message
