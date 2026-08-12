@@ -4,6 +4,8 @@
     let message = $state('');
 
     async function submitShares() {
+      if (!githubUrl) return message = "WHAT IS WRONG WITH YOU.\nWHY ARE YOU BLUE.";
+
       try {
         const response = await fetch('https://solar-pendings.eu1.netbird.services/send_shares', {
           method: 'POST',
@@ -42,7 +44,7 @@
                 <button onclick={() => togglePopover()}>Close Modal</button>
             </div>
 
-            <span>{message}</span>
+            <span>{@html message.replace(/\n/g, '<br/>')}</span>
         </div>
     {/if}
 </main>
