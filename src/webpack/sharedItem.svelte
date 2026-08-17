@@ -256,6 +256,12 @@
                 border-radius: 5px;
 
                 :global(a) { color: aqua; }
+                :global(img) {
+                    width: 100%;
+                    max-height: 25rem;
+                    @media screen and (max-width: 768px) { max-height: 10rem; }
+                    object-fit: contain;
+                }
 
                 .tabs {
                     display: flex;
