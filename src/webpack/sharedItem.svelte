@@ -258,8 +258,9 @@
                 :global(a) { color: aqua; }
                 :global(img) {
                     width: 100%;
-                    max-height: 25rem;
-                    @media screen and (max-width: 768px) { max-height: 10rem; }
+                    max-height: fit-content;
+                    /*max-height: 25rem;
+                    @media screen and (max-width: 768px) { max-height: 10rem; }*/
                     object-fit: contain;
                 }
 
