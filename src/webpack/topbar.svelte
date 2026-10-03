@@ -9,6 +9,7 @@
     { "name": "Wiki", "url": "/wiki"},
     { "name": "News", "url": "/news"},
     { "name": "Shares", "url": "/shares"},
+    { "name": "About Engine", "url": "/about"}
   ]
 
   let width = $state(0);
