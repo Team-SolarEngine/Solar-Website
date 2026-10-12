@@ -14,7 +14,16 @@
     async function getShareds() {
       const response = await fetch(urlToFeatured)
       const data = await response.text()
-      return data.trim().split("\n").filter(repo => repo.trim() !== "")
+      let arr = data.trim().split("\n");
+      for (let i = 0; i < arr.length; i++)
+      {
+        let item = arr[i];
+        if (item.startsWith("//"))
+        {
+            arr.splice(i, 1);   
+        }
+      }
+      return arr.filter(repo => repo.trim() !== "")
     }
 
     onMount(() => {
