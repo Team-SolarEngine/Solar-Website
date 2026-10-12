@@ -14,7 +14,7 @@ const page = 'about engine';
                 </div>
             </div>
             <div class="background">
-            Solar Engine is a from "scratch" engine built on top of Base 0.2.8 (The Newgrounds preview.)
+            Solar Engine is a from "scratch" engine built on top of Base 0.2.8 (The Newgrounds preview.)<br><br>
 
             As of right now the only published version is a fork of Psych 0.6.3 that adds modcharting, as well as backports some features (like note rgb coloring) from 0.7+ <br>
             The only maintainer of the Fork is <a href="https://github.com/CharGoldenYT">CharGoldenYT</a><br><br>
