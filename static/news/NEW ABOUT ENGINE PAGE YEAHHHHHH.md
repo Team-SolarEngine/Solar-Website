@@ -1,5 +1,5 @@
 **Date**: 12th October 2026 <br/>
-**Creator**:  <br/>
+**Creator**: CharGoldenYT <br/>
 **Raw File**: https://github.com/Team-SolarEngine/Solar-Website/blob/main/static/news/NEW%20ABOUT%20ENGINE%20PAGE%20YEAHHHHHH.md
 
 ---
