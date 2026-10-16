@@ -67,7 +67,7 @@
         <div class="child">
             <img src="assets/icon.png" width="150">
             <h1>Solar FNF Team</h1>
-            <span>The team that <i>tries</i> to do it's thing.</span>
+            <span>The team that <i>tries</i> to do its thing.</span>
         </div>
 
         <div class="bottom">
