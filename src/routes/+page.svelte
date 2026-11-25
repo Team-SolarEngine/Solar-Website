@@ -51,6 +51,7 @@
       "solar-lanucher",
       "solar-pending-shares-py",
       "setup-solarfiles",
+      "solarlandroid"
     ]
 
     onMount(() => {
